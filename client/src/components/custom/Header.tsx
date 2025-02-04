@@ -22,7 +22,9 @@ export default function Header() {
 
   return (
     <header className="w-full px-6 py-4 bg-white shadow-md flex justify-between items-center">
+      <Link to={'/'}>
       <h1 className="text-2xl font-bold text-gray-900">ResumeGen</h1>
+      </Link>
       
       <div className="hidden md:flex gap-6 text-gray-700">
         <button onClick={() => handleNavigation("features")} className="hover:text-gray-900">
