@@ -2,11 +2,23 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import SignUpDialog from "./SignUpDialog";
+import { useAuthContext } from "@/context/AuthProvider";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  // const [openDialog, setOpenDialog] = useState(false);
+
+  const {openAuthDialog,setOpenAuthDialog}  = useAuthContext()
+
+
+
+  const HandleLoginDialog = () => {
+    setOpenAuthDialog(true)
+  }
+
 
   // Function to navigate and scroll
   const handleNavigation = (sectionId: string) => {
@@ -38,9 +50,11 @@ export default function Header() {
         </button>
       </div>
 
-      <Link to="/dashboard">
-        <Button className="bg-gray-900 text-white hidden md:block">Get Started</Button>
-      </Link>
+      
+      <Button className="bg-gray-900 text-white hidden md:block" onClick={HandleLoginDialog}>
+        Get Started
+      </Button>
+      
 
       {/* Mobile Menu */}
       <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
@@ -61,6 +75,8 @@ export default function Header() {
           <Button className="bg-gray-900 text-white w-full">Get Started</Button>
         </div>
       )}
+
+
     </header>
   );
 }

@@ -1,11 +1,20 @@
 
+import SignUpDialog from "@/components/custom/SignUpDialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useAuthContext } from "@/context/AuthProvider";
 import { motion } from "framer-motion";
 import { ArrowRight, FileText, Rocket, Sparkles } from "lucide-react";
 
 
 export default function Home() {
+
+  const { openAuthDialog, setOpenAuthDialog } = useAuthContext()
+  const HandleLoginDialog = () => {
+    setOpenAuthDialog(true)
+  }
+
+  
   return (
     <div className="min-h-screen flex flex-col">
     
@@ -23,7 +32,7 @@ export default function Home() {
         <p className="text-gray-600 max-w-lg text-lg">
           Generate professional resumes effortlessly using AI. No design skills required!
         </p>
-        <Button className="mt-6 flex items-center gap-2">
+        <Button className="mt-6 flex items-center gap-2" onClick={HandleLoginDialog}>
           Get Started <ArrowRight className="w-4 h-4" />
         </Button>
       </section>
@@ -62,6 +71,7 @@ export default function Home() {
             </CardContent>
           </Card>
         </div>
+      <SignUpDialog openDialog={openAuthDialog} setOpenDialog={setOpenAuthDialog}/>
       </section>
 
      
