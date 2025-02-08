@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy --minify",
+    "db:generate": "npm run env prisma generate",
+    "db:migrate:deploy": "npm run env prisma migrate deploy",
+    "db:migrate:dev": "npm run env prisma migrate dev",
+    "db:seed": "npm run env prisma db seed",
+    "env": "dotenv -e ./.dev.vars --",
+    "prisma": "npm run env prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.3.1",
+    "@prisma/extension-accelerate": "^1.2.1",
+    "bcryptjs": "^2.4.3",
+    "hono": "^4.6.20",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^6.3.1"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250109.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.8",
+    "dotenv-cli": "^8.0.0",
+    "wrangler": "^3.101.0"
+  }
+}

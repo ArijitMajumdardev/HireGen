@@ -3,8 +3,11 @@ import React, { createContext, ReactNode, useContext, useState } from "react";
 
 interface IAuthContextType{
     user: { id: string; name: string } | null;
-    openAuthDialog: boolean,
-    setOpenAuthDialog : React.Dispatch<boolean>
+    setUser:React.Dispatch<{id: string; name: string}>
+    openAuthDialog: boolean
+    setOpenAuthDialog: React.Dispatch<boolean>
+    isLogged: boolean
+    setIsLogged : React.Dispatch<boolean>
 }
 
 
@@ -14,9 +17,10 @@ const AuthContext = createContext<IAuthContextType | undefined>(undefined);
 const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<{ id: string; name: string } | null>(null);
     const [openAuthDialog, setOpenAuthDialog] = useState<boolean>(false);
+    const [isLogged,setIsLogged] = useState(false)
     
     return (
-        <AuthContext.Provider value={{user,openAuthDialog,setOpenAuthDialog}}>
+        <AuthContext.Provider value={{user,setUser,openAuthDialog,setOpenAuthDialog,isLogged,setIsLogged}}>
             {children}
     </AuthContext.Provider>
     )
