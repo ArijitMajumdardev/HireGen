@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs";
 import { getPrisma } from "../../prisma/PrismaClient";
 import { Context } from "hono";
+import { HTTPException } from "hono/http-exception";
 
 
 
@@ -50,16 +51,18 @@ const  handleUserLogin = async (c:Context) : Promise<any> => {
         const prisma = getPrisma(c.env.DATABASE_URL)
     
         const user = await prisma.user.findUnique({ where: { email } });
-        if (!user) return c.json({ message: "Invalid credentials" });
+        if (!user) {
+            throw new HTTPException(401,{ message: "Invalid credentials"})
+        }
     
         const isValid = await bcrypt.compare(password, user.password);
-        if (!isValid) return c.json({ message: "Invalid credentials" });
+        if (!isValid) throw new HTTPException(401,{ message: "Invalid credentials"})
     
         const token = jwt.sign({ userId: user.id }, c.env.JWT_SECRET, { expiresIn: "1h" });
     
         return c.json({ token, user: { id: user.id, name: user.name, email: user.email } });
-      } catch (error) {
-        return c.json({ message: "Something went wrong" });
+    } catch (error) {
+        throw new HTTPException(401,{ message: error as string})
       }
     
 }

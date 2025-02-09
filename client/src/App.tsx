@@ -5,14 +5,18 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Header from './components/custom/Header'
 import Footer from './components/custom/Footer'
-  
+import  { Toaster } from 'react-hot-toast';
 function App() {
 
 
   return (
     <>
       <Router>
-        <Header/>
+        <Header />
+        <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
         <Routes>
           
           <Route path='/' element={<Home/>} />

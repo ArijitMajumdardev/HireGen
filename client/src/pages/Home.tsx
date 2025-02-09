@@ -9,7 +9,7 @@ import { ArrowRight, FileText, Rocket, Sparkles } from "lucide-react";
 
 export default function Home() {
 
-  const { openAuthDialog, setOpenAuthDialog } = useAuthContext()
+  const {  setOpenAuthDialog,isLogged } = useAuthContext()
   const HandleLoginDialog = () => {
     setOpenAuthDialog(true)
   }
@@ -31,10 +31,14 @@ export default function Home() {
         </motion.h1>
         <p className="text-gray-600 max-w-lg text-lg">
           Generate professional resumes effortlessly using AI. No design skills required!
-        </p>
-        <Button className="mt-6 flex items-center gap-2" onClick={HandleLoginDialog}>
+        </p>{
+          isLogged?
+          <Button className="mt-6 flex items-center gap-2" onClick={HandleLoginDialog}>
+          Create Resume <ArrowRight className="w-4 h-4" />
+        </Button>:<Button className="mt-6 flex items-center gap-2" onClick={HandleLoginDialog}>
           Get Started <ArrowRight className="w-4 h-4" />
         </Button>
+        }
       </section>
 
       {/* How It Works Section */}
@@ -71,7 +75,7 @@ export default function Home() {
             </CardContent>
           </Card>
         </div>
-      <SignUpDialog openDialog={openAuthDialog} setOpenDialog={setOpenAuthDialog}/>
+      {/* <SignUpDialog openDialog={openAuthDialog} setOpenDialog={setOpenAuthDialog}/> */}
       </section>
 
      

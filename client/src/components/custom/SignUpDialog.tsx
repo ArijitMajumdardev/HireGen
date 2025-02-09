@@ -5,9 +5,14 @@ import {
     DialogHeader,
     DialogTitle,
   } from "@/components/ui/dialog";
-  import React, { useState } from "react";
+  import React, { useEffect, useState } from "react";
   import { Input } from "../ui/input";
   import { Button } from "../ui/button";
+import axios from "axios";
+import { useAuthContext } from "@/context/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
   
   const SignUpDialog = ({
     openDialog,
@@ -23,7 +28,8 @@ import {
     });
   
     const [isLogin, setIsLogin] = useState(false);
-  
+    const {user,setUser,setIsLogged} = useAuthContext()
+    const navigate = useNavigate()
     const closeDialog = () => setOpenDialog(false);
   
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +37,56 @@ import {
     };
   
     const toggleForm = () => setIsLogin((prev) => !prev);
+
+
+    const API = axios.create({
+      baseURL: 'http://127.0.0.1:8787',
+  })
+
+
+
+    const handleAuthentication = async () => {
+      
+      
+        
+        try {
+          const endpoint = isLogin ? "/login" : "/signup";
+          const { data } = await API.post(endpoint, form, {
+            headers: {
+              "Content-Type":"application/json"
+            }
+          })
+
+          
+            localStorage.setItem("token", data.token)
+            setUser({email:data.user.email , name:data.user.name})
+            setIsLogged(true)
+            closeDialog()
+            navigate('/dashboard')
+            toast.success("Logged in Successfully!")
+    
+
+        } catch (error: any) {
+          console.log(error)
+          const message  = error?.response.data 
+          toast.error(message)
+        }
+
+
+      
+
+
+    }
+
+
+
+
+
+
+
+
+
+
   
     return (
       <Dialog open={openDialog} onOpenChange={closeDialog}>
@@ -73,7 +129,8 @@ import {
             <Button variant="ghost" onClick={closeDialog}>
               Cancel
             </Button>
-            <Button
+            <Button 
+              onClick={handleAuthentication}
               disabled={
                 !form.email || !form.password || (!isLogin && !form.name)
               }

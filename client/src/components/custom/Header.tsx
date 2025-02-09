@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import SignUpDialog from "./SignUpDialog";
 import { useAuthContext } from "@/context/AuthProvider";
@@ -11,7 +11,7 @@ export default function Header() {
   const location = useLocation();
   // const [openDialog, setOpenDialog] = useState(false);
 
-  const {openAuthDialog,setOpenAuthDialog}  = useAuthContext()
+  const {isLogged,setOpenAuthDialog,openAuthDialog,setIsLogged}  = useAuthContext()
 
 
 
@@ -32,13 +32,20 @@ export default function Header() {
     }
   };
 
+
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLogged(false)
+  }
+
   return (
     <header className="w-full px-6 py-4 bg-white shadow-md flex justify-between items-center">
       <Link to={'/'}>
       <h1 className="text-2xl font-bold text-gray-900">ResumeGen</h1>
       </Link>
       
-      <div className="hidden md:flex gap-6 text-gray-700">
+      <div className="hidden md:flex gap-6 text-gray-700  md:w-full justify-center md:gap-4 ">
         <button onClick={() => handleNavigation("features")} className="hover:text-gray-900">
           Features
         </button>
@@ -51,9 +58,24 @@ export default function Header() {
       </div>
 
       
-      <Button className="bg-gray-900 text-white hidden md:block" onClick={HandleLoginDialog}>
-        Get Started
-      </Button>
+      {
+        isLogged ? (
+          <div className={` md:flex gap-2 hidden }  ${(location.pathname !== '/dashboard')? 'w-72 ':''} `}>
+          {
+                (location.pathname !== '/dashboard') ?
+                <Link to={'/dashboadr'}>
+                <Button className="bg-gray-900 text-white w-full">dashboard</Button>
+              </Link>:<></>
+              }
+          <Button className="bg-gray-900 text-white w-28" onClick={handleLogout}>Logout</Button>
+          </div>
+
+        )
+          :
+          <div>
+          <Button className="bg-gray-900 text-white w-36" onClick={HandleLoginDialog}>Get Started</Button>
+          </div>
+          }
       
 
       {/* Mobile Menu */}
@@ -72,10 +94,21 @@ export default function Header() {
           <button onClick={() => handleNavigation("contact")} className="hover:text-gray-900">
             Contact
           </button>
-          <Button className="bg-gray-900 text-white w-full">Get Started</Button>
+          {
+            isLogged ? <>
+              <Button className="bg-gray-900 text-white w-full" onClick={handleLogout}>Logout</Button>
+              {
+                (location.pathname !== '/dashboard') ?
+                  <Link to={'/dashboadr'}>
+                    <Button className="bg-gray-900 text-white w-full">dashboard</Button>
+                  </Link>:<></>
+              }
+            </> : <Button className="bg-gray-900 text-white w-full" onClick={HandleLoginDialog}>Get Started</Button>
+          }
         </div>
       )}
 
+<SignUpDialog openDialog={openAuthDialog} setOpenDialog={setOpenAuthDialog}/>
 
     </header>
   );

@@ -1,5 +1,6 @@
 import {  Hono } from 'hono'
 import { handleUserLogin, handleUserSignup } from './controllers/user'
+import { cors } from 'hono/cors'
 // import { prisma } from '../prisma/PrismaClient'
 
 
@@ -16,6 +17,7 @@ const app = new Hono<
   }
 >()
 
+app.use('*', cors())
 
 
 
