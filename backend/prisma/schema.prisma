@@ -28,4 +28,15 @@ model User {
   email     String  @unique
   password  String
   createdAt DateTime @default(now())
+  resumes Resume[] @relation("UserRelation")
+}
+
+
+model Resume {
+  id String @unique
+  resumeTitle String
+  userEmail String
+  createdAt DateTime @default(now())
+
+  user User @relation("UserRelation",fields: [userEmail],references: [email])
 }

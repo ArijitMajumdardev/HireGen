@@ -66,29 +66,54 @@ const  handleUserLogin = async (c:Context) : Promise<any> => {
       }
     
 }
-// const  handleUserDetail = async (c:Context) : Promise<any> => {
+const  handleUserDetail = async (c:Context) : Promise<any> => {
     
-//     try {
-//         const token = c.headers.authorization?.split(" ")[1];
-//         if (!token) return res.status(401).json({ message: "Unauthorized" });
+  try {
+      
+    const prisma = getPrisma(c.env.DATABASE_URL);
     
-//         const decoded: any = jwt.verify(token, JWT_SECRET);
-//         const user = await prisma.user.findUnique({
-//           where: { id: decoded.userId },
-//           select: { id: true, name: true, email: true },
-//         });
+    const authHeader = c.req.header("authorization");
+
+    console.log("auth",authHeader)
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      c.status(401)
+      return c.json({ message: "Unauthorized" }, 401);
+    }
+    // const token = c.headers.authorization?.split(" ")[1];
+    const token = authHeader.split(" ")[1];
+    if (!token) {
+      c.status(404)    
+      return c.json({ message: "Unauthorized" });
+    }
     
-//         if (!user) return res.status(404).json({ message: "User not found" });
+    const decoded: any = jwt.verify(token, c.env.JWT_SECRET);
+    if (!decoded?.userId) {
+      c.status(401)
+      return c.json({ message: "Invalid token" }, 401)
+    }
+
+        const user = await prisma.user.findUnique({
+          where: { id: decoded.userId },
+          select: { id: true, name: true, email: true },
+        });
     
-//         return res.json(user);
-//       } catch {
-//         return res.status(401).json({ message: "Invalid token" });
-//       }
+    if (!user) {
+      c.status(404)    
+      return c.json({ message: "User not found" });
+    }
     
-// }
+    c.status(200)
+        return c.json(user);
+  } catch {
+    c.status(401)
+        return c.json({ message: "Invalid token" });
+      }
+    
+}
 
 
 
 
 
-export {handleUserSignup,handleUserLogin}
+export {handleUserSignup,handleUserLogin,handleUserDetail}

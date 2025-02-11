@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuthContext } from "@/context/AuthProvider";
 import { motion } from "framer-motion";
 import { ArrowRight, FileText, Rocket, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 
 export default function Home() {
@@ -32,10 +33,13 @@ export default function Home() {
         <p className="text-gray-600 max-w-lg text-lg">
           Generate professional resumes effortlessly using AI. No design skills required!
         </p>{
-          isLogged?
-          <Button className="mt-6 flex items-center gap-2" onClick={HandleLoginDialog}>
+          isLogged ?
+            <Link to={"/dashboard"}>
+            <Button className="mt-6 flex items-center gap-2" >
           Create Resume <ArrowRight className="w-4 h-4" />
-        </Button>:<Button className="mt-6 flex items-center gap-2" onClick={HandleLoginDialog}>
+        </Button>
+            </Link>
+          :<Button className="mt-6 flex items-center gap-2" onClick={HandleLoginDialog}>
           Get Started <ArrowRight className="w-4 h-4" />
         </Button>
         }

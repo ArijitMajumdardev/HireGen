@@ -73,7 +73,7 @@ export default function Header() {
         )
           :
           <div>
-          <Button className="bg-gray-900 text-white w-36" onClick={HandleLoginDialog}>Get Started</Button>
+          <Button className="bg-gray-900 text-white w-36 hidden md:block " onClick={HandleLoginDialog}>Get Started</Button>
           </div>
           }
       
