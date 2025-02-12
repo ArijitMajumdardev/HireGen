@@ -20,7 +20,7 @@ const ResumeCard = ({resumeList}:{resumeList:IResumeList[]}) => {
   return (
       <div className='mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 '>
           {
-          resumeList.map((resume, index) => (
+          resumeList.length>0 &&  resumeList.map((resume, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
