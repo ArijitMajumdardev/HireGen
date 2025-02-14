@@ -1,19 +1,16 @@
-import { createContext, ReactNode, useContext } from "react";
 
-interface IResumeContext{
-    
+import { createContext, ReactNode, useContext, useState } from "react";
+
+
+export interface IResumeContext{
+  resumeInfo: IResumeInfo|undefined
+setResumeInfo: React.Dispatch<IResumeInfo>
 }
+
+
+
 
 const ResumeInfoContext = createContext<IResumeContext|undefined>(undefined)
-
-const ResumeInfoProvider = ({children}:{ children: ReactNode }) => {
-    
-    return (
-        <ResumeInfoContext.Provider >
-            {children}
-        </ResumeInfoContext.Provider>
-    )
-}
 
 
 
@@ -25,4 +22,4 @@ const ResumeInfoProvider = ({children}:{ children: ReactNode }) => {
     return context;
   };
 
-export {useResumeInfo,ResumeInfoProvider}
+export {useResumeInfo,ResumeInfoContext}
