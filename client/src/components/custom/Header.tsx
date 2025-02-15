@@ -63,7 +63,7 @@ export default function Header() {
           <div className={` md:flex gap-2 hidden }  ${(location.pathname !== '/dashboard')? 'w-72 ':''} `}>
           {
                 (location.pathname !== '/dashboard') ?
-                <Link to={'/dashboadr'}>
+                <Link to={'/dashboard'}>
                 <Button className="bg-gray-900 text-white w-full">dashboard</Button>
               </Link>:<></>
               }
@@ -99,7 +99,7 @@ export default function Header() {
               <Button className="bg-gray-900 text-white w-full" onClick={handleLogout}>Logout</Button>
               {
                 (location.pathname !== '/dashboard') ?
-                  <Link to={'/dashboadr'}>
+                  <Link to={'/dashboard'}>
                     <Button className="bg-gray-900 text-white w-full">dashboard</Button>
                   </Link>:<></>
               }

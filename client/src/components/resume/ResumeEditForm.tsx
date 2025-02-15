@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PersonalDetail from './form/PersonalDetail'
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { Button } from '../ui/button';
@@ -8,11 +8,15 @@ import Summary from './form/Summary';
 import Experience from './form/Experience';
 import Education from './form/Education';
 import Skills from './form/Skills';
+import dummy from '@/Data/dummy';
+import API from '@/lib/ServerAPI';
 
 const ResumeForm = ({resumeId}:{resumeId:string}) => {
   const [activeFormIndex, setActiveFormIndex] = useState(1);
   const [enableNext,setEnableNext]=useState(true);
 
+ 
+  
 
   return (
     <div>
@@ -39,7 +43,7 @@ const ResumeForm = ({resumeId}:{resumeId:string}) => {
         </div>
 
         {activeFormIndex==1?  
-        <PersonalDetail enabledNext={(v)=>setEnableNext(v)} />
+        <PersonalDetail enabledNext={(v)=>setEnableNext(v)} resumeId={resumeId} />
         :activeFormIndex==2?
               <Summary  enabledNext={(v)=>setEnableNext(v)} />
         :activeFormIndex==3?

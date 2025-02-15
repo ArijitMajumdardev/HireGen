@@ -23,6 +23,6 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.8",
     "dotenv-cli": "^8.0.0",
-    "wrangler": "^3.101.0"
+    "wrangler": "^3.109.1"
   }
 }

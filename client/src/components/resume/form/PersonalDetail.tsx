@@ -1,8 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useResumeInfo } from '@/context/ResumeInfoProvider'
+import API from '@/lib/ServerAPI';
 import { LoaderCircle } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
 interface IformData{
@@ -15,16 +17,16 @@ interface IformData{
   themeColor: string | undefined;
 }
 
-const PersonalDetail = ({enabledNext}:{enabledNext:React.Dispatch<boolean>}) => {
+const PersonalDetail = ({enabledNext,resumeId}:{enabledNext:React.Dispatch<boolean>,resumeId:string}) => {
   const params=useParams();
   const { resumeInfo, setResumeInfo } = useResumeInfo()
   const [formData, setFormData] = useState<IformData>({
-    firstName: "",
-    lastName: "",
-    jobTitle: "",
-    address: "",
-    phone: "",
-    email: "",
+    firstName: resumeInfo?.firstName,
+    lastName: resumeInfo?.lastName,
+    jobTitle: resumeInfo?.jobTitle,
+    address: resumeInfo?.address,
+    phone: resumeInfo?.phone,
+    email: resumeInfo?.email,
     themeColor: "",
   });
 const [loading,setLoading] = useState(false)
@@ -45,29 +47,33 @@ const [loading,setLoading] = useState(false)
     setFormData((prev ) => ({
       ...prev,
       [name]: value
-  }));
-
-  
+    }));
     
     setResumeInfo((prev: IResumeInfo|undefined) => { return { ...prev, [name]: value } as IResumeInfo })
     
 }
 
-const onSave=(e:any)=>{
+const onSave= async(e:any)=>{
     e.preventDefault();
+    
+    try {
     setLoading(true)
-    const data={
-        data:formData
-    }
-    // GlobalApi.UpdateResumeDetail(params?.resumeId,data).then(resp=>{
-    //     console.log(resp);
-    //     enabledNext(true);
-    //     setLoading(false);
-    //     toast("Details updated")
-    // },(error)=>{
-    //     setLoading(false);
-    // })
-    setLoading(false)
+    
+    const response = await API.put('/update-resume', { data : formData, resumeId }, {
+      headers: {
+        "Content-Type":"application/json"
+      }
+    })
+      console.log(response)
+        enabledNext(true);
+        setLoading(false);
+      toast.success(response.data.message)
+    } catch (error:any) {
+      console.log("sdd", error?.response.data)
+      setLoading(false);
+      toast.error(error.response.data)
+  }
+    // setLoading(false)
   }
   
     

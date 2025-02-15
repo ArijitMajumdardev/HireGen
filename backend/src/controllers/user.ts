@@ -45,9 +45,10 @@ import { HTTPException } from "hono/http-exception";
 
   
 const  handleUserLogin = async (c:Context) : Promise<any> => {
-    
+   
     try {
-        const { email, password } = await c.req.json();
+      const { email, password } = await c.req.json();
+      
         const prisma = getPrisma(c.env.DATABASE_URL)
     
         const user = await prisma.user.findUnique({ where: { email } });
