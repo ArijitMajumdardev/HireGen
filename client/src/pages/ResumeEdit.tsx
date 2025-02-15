@@ -21,13 +21,14 @@ const ResumeEdit = () => {
     }, [])
   
   
+ 
   return (
 
    
  <ResumeInfoContext.Provider value={{resumeInfo,setResumeInfo}}>
       
     <div className=' grid grid-cols-1 md:grid-cols-2 gap-10 p-10'>
-      <ResumeForm />
+      <ResumeForm resumeId={param.id} />
       <ResumrPreview/>
 
     </div>

@@ -1,10 +1,10 @@
 
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, SetStateAction, useContext, useState } from "react";
 
 
 export interface IResumeContext{
   resumeInfo: IResumeInfo|undefined
-setResumeInfo: React.Dispatch<IResumeInfo>
+setResumeInfo: React.Dispatch<SetStateAction<IResumeInfo|undefined>>
 }
 
 

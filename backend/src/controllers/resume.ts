@@ -1,12 +1,22 @@
 import { Context } from "hono";
 import { getPrisma } from "../../prisma/PrismaClient";
 import { HTTPException } from "hono/http-exception";
+import defaultData from "../defaultData";
 
 const handleCreateResume = async (c: Context): Promise<any> => {
     try {
         const prisma = getPrisma(c.env.DATABASE_URL);
         const { uuid, resumeTitle,email } = await c.req.json();
         console.log(resumeTitle);
+        const data = {
+            id: uuid,
+            resumeTitle,
+            userEmail: email,
+            address: defaultData.address,
+            email: defaultData.email,
+            
+            
+        }
         await prisma.resume.create({
             data:{id:uuid,resumeTitle,userEmail:email}
         })
@@ -39,4 +49,14 @@ const GetResumeList = async (c: Context): Promise<any> => {
     }
 }
 
-export { handleCreateResume,GetResumeList };
+
+const updateResume = async(c :Context):Promise<any> => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
+
+export { handleCreateResume,GetResumeList,updateResume };

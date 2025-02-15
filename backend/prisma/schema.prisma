@@ -33,10 +33,16 @@ model User {
 
 
 model Resume {
-  id String @unique
+  id String @unique @id
   resumeTitle String
   userEmail String
   createdAt DateTime @default(now())
+  firstName String
+  lastName  String
+  address String
+  jobTitle String
+  phone String
+  email String
 
   user User @relation("UserRelation",fields: [userEmail],references: [email])
 }

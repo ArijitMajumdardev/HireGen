@@ -37,6 +37,6 @@ declare type Experience = {
     summery: string;
     experience: Experience[];
     education: Education[];
-    skills: Skill[];
+    skills: Skill[] ;
   };
   

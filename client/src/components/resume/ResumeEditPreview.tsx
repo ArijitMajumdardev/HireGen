@@ -5,9 +5,11 @@ import SummaryPreview from './preview/SummaryPreview'
 import ExperiencePreview from './preview/ExperiencePreview'
 import EducationalPreview from './preview/EducationalPreview'
 import SkillsPreview from './preview/SkillsPreview'
+import { useParams } from 'react-router-dom'
 
 const ResumrPreview = () => {
-  const {resumeInfo} = useResumeInfo()
+  const { resumeInfo } = useResumeInfo()
+
   return (
     <div className='shadow-lg h-full p-14 border-t-[20px]'
     style={{
