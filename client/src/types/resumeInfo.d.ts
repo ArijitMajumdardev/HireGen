@@ -40,3 +40,9 @@ declare type Experience = {
     skills: Skill[] ;
   };
   
+
+
+declare type AISummary = {
+  experience_level: string;
+  summary: string;
+}
