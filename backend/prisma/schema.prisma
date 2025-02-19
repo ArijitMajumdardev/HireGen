@@ -43,6 +43,8 @@ model Resume {
   jobTitle String
   phone String
   email String
+  summary String
+  
 
   user User @relation("UserRelation",fields: [userEmail],references: [email])
 }

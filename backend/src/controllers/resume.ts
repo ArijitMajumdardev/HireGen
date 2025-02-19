@@ -18,7 +18,7 @@ const handleCreateResume = async (c: Context): Promise<any> => {
             lastName: defaultData.lastName,
             jobTitle: defaultData.jobTitle,
             phone: defaultData.phone,
-            
+            summary:defaultData.summary
         }
         await prisma.resume.create({
             data:data
@@ -57,17 +57,27 @@ const updateResume = async (c: Context): Promise<any> => {
     
     try {
         const prisma = getPrisma(c.env.DATABASE_URL)
-        const {data,resumeId} = await c.req.json();
-        const { address, email, firstName, lastName, jobTitle, phone } = data; 
+        const { data, resumeId } = await c.req.json();
+        if (!data || typeof data !== "object") {
+            throw new HTTPException(400, { message: "Invalid data format" });
+        }
+        const { address, email, firstName, lastName, jobTitle, phone,summary } = data; 
         
-        console.log(firstName)
+        const updateData: Record<string, any> = {};
+        if (address !== undefined) updateData.address = address;
+        if (email !== undefined) updateData.email = email;
+        if (firstName !== undefined) updateData.firstName = firstName;
+        if (lastName !== undefined) updateData.lastName = lastName;
+        if (jobTitle !== undefined) updateData.jobTitle = jobTitle;
+        if (phone !== undefined) updateData.phone = phone;
+        if (summary !== undefined) updateData.summary = summary;
+
+        console.log("updated ",updateData)
         const res = await prisma.resume.update({
             where: {
                 id:resumeId,
             },
-            data: {
-                address, email, firstName, lastName, jobTitle, phone
-            }
+            data:  updateData,
         })
 
         console.log("rese",res)
@@ -75,7 +85,8 @@ const updateResume = async (c: Context): Promise<any> => {
         return c.json({message:"Successfully Updated"})
     } catch (error) {
         c.status(400)
-        throw new HTTPException(400,{message:"Internal Server Error"})
+        console.log(error)
+        throw new HTTPException(400,{message:error as string})
     }
 }
 

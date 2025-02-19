@@ -9,12 +9,18 @@ import { useParams } from 'react-router-dom';
 
 const Summary = ({ enabledNext }: { enabledNext: React.Dispatch<boolean> }) => {
   const { resumeInfo, setResumeInfo } = useResumeInfo()
-  const [summery,setSummery]=useState<string>();
+  const [summary,setSummary]=useState<string>();
   const [loading,setLoading]=useState(false);
   const params = useParams();
   const resumeId = params.id
   const [aiGeneratedSummeryList, setAiGenerateSummeryList] = useState();
-  
+
+
+  const handleChangeSummary = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    enabledNext(false)
+    const { value } = e.target;
+    setResumeInfo((prev: IResumeInfo|undefined) => { return { ...prev, summary: value } as IResumeInfo })
+  }
 
 //   const GenerateSummeryFromAI=async()=>{
 //     setLoading(true)
@@ -33,7 +39,7 @@ const Summary = ({ enabledNext }: { enabledNext: React.Dispatch<boolean> }) => {
     try {
     setLoading(true)
     
-    const response = await API.put('/update-resume', { data : summery, resumeId }, {
+      const response = await API.put('/update-resume', { data: { summary:resumeInfo?.summary } , resumeId }, {
       headers: {
         "Content-Type":"application/json"
       }
@@ -47,7 +53,7 @@ const Summary = ({ enabledNext }: { enabledNext: React.Dispatch<boolean> }) => {
       setLoading(false);
       toast.error(error.response.data)
   }
-    // setLoading(false)
+    setLoading(false)
   }
 
 
@@ -64,10 +70,10 @@ const Summary = ({ enabledNext }: { enabledNext: React.Dispatch<boolean> }) => {
            type="button" size="sm" className="border-primary text-primary flex gap-2"> 
            <Brain className='h-4 w-4' />  Generate from AI</Button>
        </div>
-       <Textarea className="mt-5" required
-       value={summery}
-           defaultValue={summery?summery:resumeInfo?.summery}
-       onChange={(e)=>setSummery(e.target.value)}
+       <Textarea className="mt-5 h-[20vh] resize-none " required
+       
+           defaultValue={resumeInfo?.summary}
+       onChange={handleChangeSummary}
        />
        <div className='mt-2 flex justify-end'>
        <Button type="submit"
