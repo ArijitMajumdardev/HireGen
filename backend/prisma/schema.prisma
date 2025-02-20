@@ -45,6 +45,21 @@ model Resume {
   email String
   summary String
   
-
+  experiences Experience[] @relation("ResumeExperienceRelation")
   user User @relation("UserRelation",fields: [userEmail],references: [email])
+}
+
+
+model Experience{
+      id String @id @default(uuid())
+    title String
+    companyName String
+    city String
+    state String
+    startDate String
+    endDate String
+    currentlyWorking Boolean
+    workSummery String
+    resumeId String
+    resume Resume @relation("ResumeExperienceRelation",fields: [resumeId],references: [id])
 }

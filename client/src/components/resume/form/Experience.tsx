@@ -13,7 +13,7 @@ const Experience = () => {
   const [loading,setLoading]=useState(false);
 
   useEffect(() => {
-    if(resumeInfo?.experience!=undefined)
+    if(resumeInfo?.experience!==undefined)
       resumeInfo?.experience.length>0&&setExperinceList(resumeInfo?.experience as Experience[])
       
   }, [])
