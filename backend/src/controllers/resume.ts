@@ -20,8 +20,15 @@ const handleCreateResume = async (c: Context): Promise<any> => {
             phone: defaultData.phone,
             summary:defaultData.summary
         }
+        const experience = defaultData.experience
         await prisma.resume.create({
-            data:data
+            data: {
+                ...data,
+                experiences: {
+                    create: defaultData.experience ,
+                }
+            },
+            include:{experiences:true}
         })
         
         c.status(200);
@@ -101,7 +108,8 @@ const Get_Resume = async (c: Context): Promise<any> => {
         const response = await prisma.resume.findUnique({
             where: {
                 id:resumeId
-            }
+            },
+            include:{experiences:true}
         })
 
         console.log(response);

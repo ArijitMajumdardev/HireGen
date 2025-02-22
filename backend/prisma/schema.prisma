@@ -61,5 +61,5 @@ model Experience{
     currentlyWorking Boolean
     workSummery String
     resumeId String
-    resume Resume @relation("ResumeExperienceRelation",fields: [resumeId],references: [id])
+    resume Resume @relation("ResumeExperienceRelation",fields: [resumeId],references: [id],onDelete: Cascade)
 }
