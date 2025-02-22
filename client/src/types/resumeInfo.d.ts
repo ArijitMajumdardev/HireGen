@@ -35,7 +35,7 @@ declare type Experience = {
     email: string;
     themeColor: string;
     summary: string;
-    experience: Experience[];
+    experiences: Experience[];
     education: Education[];
     skills: Skill[] ;
   };

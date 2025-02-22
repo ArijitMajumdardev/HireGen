@@ -20,7 +20,7 @@ const ResumrPreview = () => {
         {/* Summery  */}
             <SummaryPreview resumeInfo={resumeInfo} />
         {/* Professional Experience  */}
-           {resumeInfo?.experience?.length as number >0&& <ExperiencePreview resumeInfo={resumeInfo} />}
+           {resumeInfo?.experiences?.length as number >0&& <ExperiencePreview resumeInfo={resumeInfo} />}
         {/* Educational  */}
         {resumeInfo?.education?.length as number >0&&   <EducationalPreview resumeInfo={resumeInfo} />}
         {/* Skilss  */}
