@@ -1,13 +1,13 @@
 declare type Experience = {
-    id: number;
-    title: string;
-    companyName: string;
-    city: string;
-    state: string;
-    startDate: string;
-    endDate: string;
-    currentlyWorking: boolean;
-    workSummery: string;
+    id?: string;
+    title?: string;
+    companyName?: string;
+    city?: string;
+    state?: string;
+    startDate?: string;
+    endDate?: string;
+    currentlyWorking?: boolean;
+    workSummery?: string;
   };
   
   declare type Education = {

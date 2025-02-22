@@ -6,11 +6,24 @@ import { LoaderCircle } from 'lucide-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+const formField={
+  title:'',
+  companyName:'',
+  city:'',
+  state:'',
+  startDate:'',
+  endDate:'',
+  workSummery:'',
+
+}
+
+
 const Experience = () => {
   const [experinceList,setExperinceList]=useState<Experience[]>([]);
   const {resumeInfo,setResumeInfo}=useResumeInfo()
   const params=useParams();
-  const [loading,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
+  
 
   useEffect(() => {
     if(resumeInfo?.experiences!==undefined)
@@ -18,14 +31,28 @@ const Experience = () => {
       
   }, [])
   
-  const handleChange = (index : number,event : React.ChangeEvent<HTMLInputElement>) => {
-    
+  const handleChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+    const newEntries=experinceList.slice();
+    const {name,value}=event.target;
+    if (name in newEntries[index]) {
+      newEntries[index] = {
+        ...newEntries[index],
+        [name]: value,
+      };
+    }
+    console.log(newEntries)
+    setExperinceList(newEntries);
+    setResumeInfo((prev: IResumeInfo|undefined) => { return { ...prev, experiences: newEntries } as IResumeInfo })
   }
 
   const AddNewExperience = () => {
-    
+    setExperinceList([...experinceList,formField])
   }
   const RemoveExperience = () => {
+    let newEntries = experinceList.slice();
+    newEntries = newEntries.slice(0, -1);
+    setExperinceList(newEntries)
+    setResumeInfo((prev: IResumeInfo|undefined) => { return { ...prev, experiences: newEntries } as IResumeInfo })
     
   }
   const onSave = () => {
@@ -86,6 +113,7 @@ const Experience = () => {
                        index={index}
                        defaultValue={item?.workSummery}
                        onRichTextEditorChange={(event)=>handleRichTextEditor(event,'workSummery',index)}  /> */}
+                <RichTextEditor/>
                     </div>
                 </div>
             </div>
