@@ -21,7 +21,7 @@ function ExperiencePreview({resumeInfo}:{resumeInfo:IResumeInfo|undefined}) {
                 <h2 className='text-xs flex justify-between'>{experience?.companyName}, 
                 {experience?.city}, 
                 {experience?.state}
-                <span>{experience?.startDate} To {experience?.currentlyWorking?'Present':experience.endDate} </span>
+                <span>{experience?.startDate} To {experience.endDate} </span>
                 </h2>
                 <p className='text-xs my-2 whitespace-pre-line'>
                     {experience.workSummery}
