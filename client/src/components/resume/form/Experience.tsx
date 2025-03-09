@@ -66,12 +66,10 @@ const Experience = () => {
     const newEntries = resumeInfo?.experiences.slice()!;
     newEntries.push(formField)
     setResumeInfo((prev: IResumeInfo | undefined) => { return { ...prev, experiences: newEntries } as IResumeInfo })
-    // setExperinceList([...experinceList, formField])
   }
   const RemoveExperience = () => {
-    let newEntries = experinceList.slice();
+    let newEntries = resumeInfo?.experiences!;
     newEntries = newEntries.slice(0, -1);
-    setExperinceList(newEntries)
     setResumeInfo((prev: IResumeInfo|undefined) => { return { ...prev, experiences: newEntries } as IResumeInfo })
     
   }
