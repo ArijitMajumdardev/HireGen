@@ -3,35 +3,32 @@ import { useState } from 'react';
 import { 
   BtnBold,
   BtnBulletList,
-  BtnClearFormatting,
   BtnItalic,
   BtnLink,
   BtnNumberedList,
-  BtnRedo,
   BtnStrikeThrough,
-  BtnStyles,
   BtnUnderline,
-  BtnUndo,
+  ContentEditableEvent,
   Editor,
   EditorProvider,
-  HtmlButton,
   Separator,
   Toolbar
 } from 'react-simple-wysiwyg';
-export const RichTextEditor = () => {
-    const [value, setValue] = useState('simple text');
+export const RichTextEditor = ({defaultValue,onRichTextEditorChange}:{defaultValue : string,onRichTextEditorChange:(e:ContentEditableEvent)=>void}) => {
+    const [value, setValue] = useState(defaultValue);
 
-    function onChange(e) {
-      setValue(e.target.value);
-    }
+  
   return (
-    <EditorProvider>
-    <Editor value={value} onChange={onChange}>
+    <EditorProvider >
+      <Editor value={value} onChange={(e) => {
+        console.log(e.target.value)
+        setValue(e.target.value)
+        onRichTextEditorChange(e)
+      }}
+      
+      >
     <Toolbar>
-          <BtnUndo />
-          <BtnRedo />
-          <Separator />
-          <BtnBold />
+    <BtnBold />
           <BtnItalic />
           <BtnUnderline />
           <BtnStrikeThrough />
@@ -40,10 +37,7 @@ export const RichTextEditor = () => {
           <BtnBulletList />
           <Separator />
           <BtnLink />
-          <BtnClearFormatting />
-          <HtmlButton />
-          <Separator />
-          <BtnStyles />
+
         </Toolbar>
     </Editor>
   </EditorProvider>

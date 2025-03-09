@@ -5,6 +5,7 @@ import { useResumeInfo } from '@/context/ResumeInfoProvider'
 import { IterationCcw, LoaderCircle } from 'lucide-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { ContentEditableEvent } from 'react-simple-wysiwyg'
 
 const formField={
   title:'',
@@ -24,18 +25,15 @@ interface IexperienceList{
 
 
 const Experience = () => {
-  const [experinceList,setExperinceList]=useState<IexperienceList>({updated:[],newAdded:[]});
+
   const {resumeInfo,setResumeInfo}=useResumeInfo()
-  const params=useParams();
+  const params = useParams();
+  const resumeId = params.id
+  
   const [loading, setLoading] = useState(false);
   
-
-  // useEffect(() => {
-  //   if(resumeInfo?.experiences!==undefined)
-  //     resumeInfo?.experiences.length>0&&setExperinceList(resumeInfo?.experiences as Experience[])
-      
-  // }, [])
   
+  //handling the change in all input fields other than RichTextEditor
   const handleChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const newEntries=resumeInfo?.experiences.slice()!;
     const {name,value}=event.target;
@@ -46,25 +44,23 @@ const Experience = () => {
       };
     }
     console.log(newEntries)
-    setExperinceList((prevList :IexperienceList) => {
-      let updatedList = prevList.updated
-      const existingEntryIndex = updatedList.findIndex((exp) => exp.id === newEntries[index].id)
-      if (existingEntryIndex !== -1) {
-        // If the entry already exists, update it
-        updatedList[existingEntryIndex]=newEntries[index]
-        return {...prevList,updated : updatedList}
-      } else {
-        // If the entry is new, add it
-        updatedList = [...updatedList, newEntries[index]];
-      return {...prevList,updated : updatedList}
-
-      }
-
-    });
     setResumeInfo((prev: IResumeInfo | undefined) => { return { ...prev, experiences: newEntries } as IResumeInfo })
-    console.log("list ",experinceList)
-    
+  
   }
+
+  //handling the change for the RichTextEditor 
+  const handleRichTextEditor = ( e :ContentEditableEvent,name:string , index:number)=>{
+    const newEntries=resumeInfo?.experiences.slice()!;
+    const value =e.target.value;
+    if (name in newEntries[index]) {
+      newEntries[index] = {
+        ...newEntries[index],
+        [name]: value,
+      };
+    }
+    setResumeInfo((prev: IResumeInfo | undefined) => { return { ...prev, experiences: newEntries } as IResumeInfo })
+
+}
 
   const AddNewExperience = () => {
     setExperinceList([...experinceList, formField])
@@ -169,7 +165,7 @@ const Experience = () => {
                        index={index}
                        defaultValue={item?.workSummery}
                        onRichTextEditorChange={(event)=>handleRichTextEditor(event,'workSummery',index)}  /> */}
-                <RichTextEditor />
+                <RichTextEditor defaultValue={item?.workSummery || ""}  onRichTextEditorChange={(event:ContentEditableEvent)=>handleRichTextEditor(event,'workSummery',index)} />
                     </div>
                 </div>
             </div>
