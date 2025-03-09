@@ -23,10 +23,10 @@ function ExperiencePreview({resumeInfo}:{resumeInfo:IResumeInfo|undefined}) {
                 {experience?.state}
                 <span>{experience?.startDate} To {experience.endDate} </span>
                 </h2>
-                <p className='text-xs my-2 whitespace-pre-line'>
+                {/* <p className='text-xs my-2 whitespace-pre-line'>
                     {experience.workSummery}
-                </p>
-                {/* <div className='text-xs my-2' dangerouslySetInnerHTML={{__html:experience?.workSummery}}  /> */}
+                </p> */}
+                <div className='text-xs my-2 prose'  dangerouslySetInnerHTML={{__html:experience?.workSummery!}}  />
             </div>
         ))}
     </div>
