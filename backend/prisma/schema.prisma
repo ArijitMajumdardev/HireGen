@@ -58,7 +58,6 @@ model Experience{
     state String
     startDate String
     endDate String
-    currentlyWorking Boolean
     workSummery String
     resumeId String
     resume Resume @relation("ResumeExperienceRelation",fields: [resumeId],references: [id],onDelete: Cascade)
