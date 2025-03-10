@@ -12,53 +12,62 @@ generator client {
 //   provider = "postgresql"
 //   url      = env("DATABASE_URL")
 //   directUrl = env("DIRECT_DATABASE_URL")
-  
+
 // }
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_DATABASE_URL")
-  
 }
-
 
 model User {
-  id        String  @id @default(uuid())
+  id        String   @id @default(uuid())
   name      String
-  email     String  @unique
+  email     String   @unique
   password  String
   createdAt DateTime @default(now())
-  resumes Resume[] @relation("UserRelation")
+  resumes   Resume[] @relation("UserRelation")
 }
-
 
 model Resume {
-  id String @unique @id
+  id          String   @id @unique
   resumeTitle String
-  userEmail String
-  createdAt DateTime @default(now())
-  firstName String
-  lastName  String
-  address String
-  jobTitle String
-  phone String
-  email String
-  summary String
-  
+  userEmail   String
+  createdAt   DateTime @default(now())
+  firstName   String
+  lastName    String
+  address     String
+  jobTitle    String
+  phone       String
+  email       String
+  summary     String
+
+  education   Education[]  @relation("ResumeEducationRelation")
   experiences Experience[] @relation("ResumeExperienceRelation")
-  user User @relation("UserRelation",fields: [userEmail],references: [email])
+  user        User         @relation("UserRelation", fields: [userEmail], references: [email])
 }
 
+model Experience {
+  id          String @id @default(uuid())
+  title       String
+  companyName String
+  city        String
+  state       String
+  startDate   String
+  endDate     String
+  workSummery String
+  resumeId    String
+  resume      Resume @relation("ResumeExperienceRelation", fields: [resumeId], references: [id], onDelete: Cascade)
+}
 
-model Experience{
-      id String @id @default(uuid())
-    title String
-    companyName String
-    city String
-    state String
-    startDate String
-    endDate String
-    workSummery String
-    resumeId String
-    resume Resume @relation("ResumeExperienceRelation",fields: [resumeId],references: [id],onDelete: Cascade)
+model Education {
+  id             String @id @default(uuid())
+  universityName String
+  startDate      String
+  endDate        String
+  degree         String
+  major          String
+  description    String
+  resumeId       String
+  resume         Resume @relation("ResumeEducationRelation", fields: [resumeId], references: [id], onDelete: Cascade)
 }
