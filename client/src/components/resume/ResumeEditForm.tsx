@@ -47,7 +47,7 @@ const ResumeForm = ({resumeId}:{resumeId:string}) => {
         :activeFormIndex==2?
               <Summary  enabledNext={(v)=>setEnableNext(v)} />
         :activeFormIndex==3?
-          <Experience />  
+          <Experience enabledNext={(v)=>setEnableNext(v)}  resumeId={resumeId}/>  
           :activeFormIndex==4?
           <Education/>
           :activeFormIndex==5?
