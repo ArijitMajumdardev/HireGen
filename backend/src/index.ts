@@ -2,7 +2,7 @@ import {  Context, Hono } from 'hono'
 import { handleUserDetail, handleUserLogin, handleUserSignup } from './controllers/user'
 import { cors } from 'hono/cors'
 import { handle_Auth_Middleware } from './middlewares/authMiddleware'
-import { Get_Resume, GetResumeList, handleCreateResume, updateResume } from './controllers/resume'
+import { Get_Resume, GetResumeList, handleCreateResume, updateExperience, updateResume } from './controllers/resume'
 import { logger } from 'hono/logger'
 // import { prisma } from '../prisma/PrismaClient'
 
@@ -33,7 +33,9 @@ app.get("/user-detail",handleUserDetail)
 app.post("/create-resume", handle_Auth_Middleware, handleCreateResume)
 app.get("/resume-list", handle_Auth_Middleware, GetResumeList)
 app.put("update-resume",handle_Auth_Middleware,updateResume)
-app.get("/get-resume/:resumeId",handle_Auth_Middleware,Get_Resume)
+app.get("/get-resume/:resumeId", handle_Auth_Middleware, Get_Resume)
+app.put("update-experience",handle_Auth_Middleware,updateExperience)
+
 
 
 export default app
