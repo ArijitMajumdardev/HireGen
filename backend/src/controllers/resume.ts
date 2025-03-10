@@ -130,7 +130,7 @@ const updateExperience = async (c: Context): Promise<any> => {
       experiences.map(async (exp) => {
         await prisma.experience.upsert({
           where: {
-            id: exp.id,
+            id: exp.id || "",
           },
           update: {
             title: exp.title,
@@ -139,7 +139,6 @@ const updateExperience = async (c: Context): Promise<any> => {
             state: exp.state,
             startDate: exp.startDate,
             endDate: exp.endDate,
-            currentlyWorking: exp.currentlyWorking,
             workSummery: exp.workSummery,
           },
           create: {
@@ -149,7 +148,6 @@ const updateExperience = async (c: Context): Promise<any> => {
             state: exp.state,
             startDate: exp.startDate,
             endDate: exp.endDate,
-            currentlyWorking: exp.currentlyWorking,
             workSummery: exp.workSummery,
             resumeId,
           },
