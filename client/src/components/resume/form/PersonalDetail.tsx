@@ -90,7 +90,7 @@ const onSave= async(e:any)=>{
             </div>
             <div>
                 <label className='text-sm'>Last Name</label>
-                <Input name="lastName" required onChange={handleInputChange} 
+                <Input name="lastName"  onChange={handleInputChange} 
                 defaultValue={resumeInfo?.lastName} />
             </div>
             <div className='col-span-2'>
