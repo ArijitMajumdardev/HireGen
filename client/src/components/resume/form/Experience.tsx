@@ -24,7 +24,13 @@ interface IexperienceList {
   newAdded: Experience[];
 }
 
-const Experience = ({enabledNext,resumeId}:{enabledNext:React.Dispatch<boolean>,resumeId:string}) => {
+const Experience = ({
+  enabledNext,
+  resumeId,
+}: {
+  enabledNext: React.Dispatch<boolean>;
+  resumeId: string;
+}) => {
   const { resumeInfo, setResumeInfo } = useResumeInfo();
 
   const [loading, setLoading] = useState(false);
@@ -50,12 +56,11 @@ const Experience = ({enabledNext,resumeId}:{enabledNext:React.Dispatch<boolean>,
 
   //handling the change for the RichTextEditor
   const handleRichTextEditor = (
-    e: ContentEditableEvent,
+    value: string,
     name: string,
     index: number
   ) => {
     const newEntries = resumeInfo?.experiences.slice()!;
-    const value = e.target.value;
     if (name in newEntries[index]) {
       newEntries[index] = {
         ...newEntries[index],
@@ -85,9 +90,9 @@ const Experience = ({enabledNext,resumeId}:{enabledNext:React.Dispatch<boolean>,
     });
   };
 
-  // Saving in the db 
+  // Saving in the db
   const onSave = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     const experienceList = resumeInfo?.experiences.slice()!;
     const hasEmptyFields = experienceList.some((exp) =>
       Object.values(exp).some(
@@ -96,51 +101,39 @@ const Experience = ({enabledNext,resumeId}:{enabledNext:React.Dispatch<boolean>,
     );
 
     if (hasEmptyFields) {
-      toast.error("please fill in all fields before saving")
+      toast.error("please fill in all fields before saving");
       return;
     }
 
     try {
-      setLoading(true)
-      
-      const response = await API.put('/update-experience', { data : experienceList, resumeId }, {
-        headers: {
-          "Content-Type":"application/json"
+      setLoading(true);
+
+      const response = await API.put(
+        "/update-experience",
+        { data: experienceList, resumeId },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      })
-        console.log(response)
-          enabledNext(true);
-          setLoading(false);
-        toast.success(response.data.message)
-      } catch (error:any) {
-        console.log("sdd", error?.response.data)
-        setLoading(false);
-        toast.error(error.response.data)
+      );
+      console.log(response);
+      enabledNext(true);
+      setLoading(false);
+      toast.success(response.data.message);
+    } catch (error: any) {
+      console.log("sdd", error?.response.data);
+      setLoading(false);
+      toast.error(error.response.data);
     }
-
-    // const newExperiences = experinceList.filter((exp) => !exp.id);
-    // const updatedExperiences = experinceList.filter((exp) => exp.id);
-
-    // try {
-    //   setLoading(true);
-    //   await fetch("/api/experiences", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ newExperiences, updatedExperiences }),
-    //   });
-    //   console.log(newExperiences);
-    //   console.log(updatedExperiences);
-
-    //   setLoading(false);
-    // } catch (error) {
-    //   console.error("Error saving experiences:", error);
-    //   setLoading(false);
-    // }
   };
 
   return (
     <div>
-      <form className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10" onSubmit={onSave}>
+      <form
+        className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10"
+        onSubmit={onSave}
+      >
         <h2 className="font-bold text-lg">Professional Experience</h2>
         <p>Add Your previous Job experience</p>
         <div>
@@ -203,14 +196,11 @@ const Experience = ({enabledNext,resumeId}:{enabledNext:React.Dispatch<boolean>,
                 </div>
                 <div className="col-span-2">
                   {/* Work Summery  */}
-                  {/* <RichTextEditor
-                       index={index}
-                       defaultValue={item?.workSummery}
-                       onRichTextEditorChange={(event)=>handleRichTextEditor(event,'workSummery',index)}  /> */}
-                  <RichTextEditor 
+                  <RichTextEditor
+                    index={index}
                     defaultValue={item?.workSummery || ""}
-                    onRichTextEditorChange={(event: ContentEditableEvent) =>
-                      handleRichTextEditor(event, "workSummery", index)
+                    onRichTextEditorChange={(value: string) =>
+                      handleRichTextEditor(value, "workSummery", index)
                     }
                   />
                 </div>
@@ -239,7 +229,7 @@ const Experience = ({enabledNext,resumeId}:{enabledNext:React.Dispatch<boolean>,
               - Remove
             </Button>
           </div>
-          <Button disabled={loading}  type="submit">
+          <Button disabled={loading} type="submit">
             {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
           </Button>
         </div>
