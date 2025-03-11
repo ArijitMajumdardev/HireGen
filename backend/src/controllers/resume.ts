@@ -27,10 +27,10 @@ const handleCreateResume = async (c: Context): Promise<any> => {
           create: defaultData.experience,
         },
         education: {
-          create:defaultData.education
-        }
+          create: defaultData.education,
+        },
       },
-      include: { experiences: true,education:true },
+      include: { experiences: true, education: true },
     });
 
     c.status(200);
@@ -108,7 +108,7 @@ const Get_Resume = async (c: Context): Promise<any> => {
       where: {
         id: resumeId,
       },
-      include: { experiences: true ,education:true},
+      include: { experiences: true, education: true },
     });
 
     console.log(response);
@@ -165,10 +165,56 @@ const updateExperience = async (c: Context): Promise<any> => {
     throw new HTTPException(400, { message: error as string });
   }
 };
+
+const updateEducation = async (c: Context): Promise<any> => {
+  try {
+    const prisma = getPrisma(c.env.DATABASE_URL);
+    const { data: education, resumeId } = await c.req.json();
+    if (!Array.isArray(education) || typeof resumeId !== "string") {
+      throw new HTTPException(400, { message: "Invalid data format" });
+    }
+
+    await Promise.all(
+      education.map(async (ed) => {
+        await prisma.education.upsert({
+          where: {
+            id: ed.id || "",
+          },
+          update: {
+            universityName: ed.universityName,
+            startDate: ed.startDate,
+            endDate: ed.endDate,
+            degree: ed.degree,
+            major: ed.major,
+            description: ed.description,
+          },
+          create: {
+            universityName: ed.universityName,
+            startDate: ed.startDate,
+            endDate: ed.endDate,
+            degree: ed.degree,
+            major: ed.major,
+            description: ed.description,
+            resumeId,
+          },
+        });
+      })
+    );
+
+    c.status(200);
+    return c.json({ message: "Successfully Updated" });
+  } catch (error) {
+    c.status(400);
+    console.log(error);
+    throw new HTTPException(400, { message: error as string });
+  }
+};
+
 export {
   handleCreateResume,
   GetResumeList,
   updateResume,
   Get_Resume,
   updateExperience,
+  updateEducation,
 };
