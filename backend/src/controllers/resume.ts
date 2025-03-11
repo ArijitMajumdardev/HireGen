@@ -111,7 +111,7 @@ const Get_Resume = async (c: Context): Promise<any> => {
       where: {
         id: resumeId,
       },
-      include: { experiences: true, education: true },
+      include: { experiences: true, education: true,skills: true },
     });
 
     console.log(response);
