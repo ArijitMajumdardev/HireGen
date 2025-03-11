@@ -44,6 +44,7 @@ model Resume {
 
   education   Education[]  @relation("ResumeEducationRelation")
   experiences Experience[] @relation("ResumeExperienceRelation")
+  skills      Skills[]     @relation("ResumeSkillRelation")
   user        User         @relation("UserRelation", fields: [userEmail], references: [email])
 }
 
@@ -70,4 +71,12 @@ model Education {
   description    String
   resumeId       String
   resume         Resume @relation("ResumeEducationRelation", fields: [resumeId], references: [id], onDelete: Cascade)
+}
+
+model Skills {
+  id       String @id @default(uuid())
+  name     String
+  rating   Int
+  resumeId String
+  resume   Resume @relation("ResumeSkillRelation", fields: [resumeId], references: [id], onDelete: Cascade)
 }

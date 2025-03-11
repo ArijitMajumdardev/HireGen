@@ -29,8 +29,11 @@ const handleCreateResume = async (c: Context): Promise<any> => {
         education: {
           create: defaultData.education,
         },
+        skills: {
+          create: defaultData.skills
+        }
       },
-      include: { experiences: true, education: true },
+      include: { experiences: true, education: true, skills: true },
     });
 
     c.status(200);
@@ -210,6 +213,42 @@ const updateEducation = async (c: Context): Promise<any> => {
   }
 };
 
+const updateSkills = async (c: Context): Promise<any> => {
+  try {
+    const prisma = getPrisma(c.env.DATABASE_URL);
+    const { data: skills, resumeId } = await c.req.json();
+    if (!Array.isArray(skills) || typeof resumeId !== "string") {
+      throw new HTTPException(400, { message: "Invalid data format" });
+    }
+
+    await Promise.all(
+      skills.map(async (sk) => {
+        await prisma.skills.upsert({
+          where: {
+            id: sk.id || "",
+          },
+          update: {
+            name: sk.name,
+            rating: sk.rating
+          },
+          create: {
+            name: sk.name,
+            rating: sk.rating,
+            resumeId,
+          },
+        });
+      })
+    );
+
+    c.status(200);
+    return c.json({ message: "Successfully Updated" });
+  } catch (error) {
+    c.status(400);
+    console.log(error);
+    throw new HTTPException(400, { message: error as string });
+  }
+};
+
 export {
   handleCreateResume,
   GetResumeList,
@@ -217,4 +256,5 @@ export {
   Get_Resume,
   updateExperience,
   updateEducation,
+  updateSkills
 };
