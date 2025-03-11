@@ -41,7 +41,7 @@ export default{
     ],
     education:[
         {
-            id:1,
+            
             universityName:'Western Illinois University',
             startDate:'Aug 2018',
             endDate:'Dec:2019',
@@ -50,7 +50,7 @@ export default{
             description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
         },
         {
-            id:2,
+            
             universityName:'Western Illinois University',
             startDate:'Aug 2018',
             endDate:'Dec:2019',
@@ -61,22 +61,22 @@ export default{
     ],
     skills:[
         {
-            id:1,
+            
             name:'Angular',
             rating:80,
         },
         {
-            id:1,
+            
             name:'React',
             rating:100,
         },
         {
-            id:1,
+            
             name:'MySql',
             rating:80,
         },
         {
-            id:1,
+            
             name:'React Native',
             rating:100,
         }
