@@ -19,7 +19,7 @@ function SkillsPreview({resumeInfo}:{resumeInfo:IResumeInfo|undefined}) {
                 <div className='h-2 bg-gray-200 w-[120px]'>
                 <div className='h-2'
                         style={{
-                            backgroundColor:resumeInfo?.themeColor,
+                            backgroundColor:resumeInfo?.themeColor||'black',
                             width:skill?.rating+'%'
                         }}
                     >

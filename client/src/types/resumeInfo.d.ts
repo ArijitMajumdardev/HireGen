@@ -21,7 +21,7 @@ declare type Experience = {
   };
   
   declare type Skill = {
-    id: number;
+    id?: number;
     name: string;
     rating: number;
   };

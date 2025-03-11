@@ -51,7 +51,7 @@ const ResumeForm = ({resumeId}:{resumeId:string}) => {
           :activeFormIndex==4?
           <Education enabledNext={(v)=>setEnableNext(v)}  resumeId={resumeId}/>
           :activeFormIndex==5?
-          <Skills/>
+          <Skills  enabledNext={(v)=>setEnableNext(v)}  resumeId={resumeId}/>
           :activeFormIndex==6?
                   <Navigate to={'/my-resume/' + resumeId +"/view"}/>
               
