@@ -249,6 +249,26 @@ const updateSkills = async (c: Context): Promise<any> => {
   }
 };
 
+const deleteSkill = async (c: Context): Promise<any>=>{
+  try {
+    const prisma = getPrisma(c.env.DATABASE_URL);
+    const { skillId}  = await c.req.json();
+console.log("llllll  ",skillId)
+  await prisma.skills.delete({
+      where: {
+        id:skillId
+      }
+    })
+
+    c.status(200);
+    return c.json({ message: "Successfully removed" });
+  } catch (error) {
+    c.status(400);
+    console.log(error);
+    throw new HTTPException(400, { message: error as string });
+  }
+}
+
 export {
   handleCreateResume,
   GetResumeList,
@@ -256,5 +276,5 @@ export {
   Get_Resume,
   updateExperience,
   updateEducation,
-  updateSkills
+  updateSkills,deleteSkill
 };
