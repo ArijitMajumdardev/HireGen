@@ -40,6 +40,7 @@ const Experience = ({
     index: number,
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    enabledNext(false);
     const newEntries = resumeInfo?.experiences.slice()!;
     const { name, value } = event.target;
     if (name in newEntries[index]) {
@@ -60,6 +61,7 @@ const Experience = ({
     name: string,
     index: number
   ) => {
+    enabledNext(false);
     const newEntries = resumeInfo?.experiences.slice()!;
     if (name in newEntries[index]) {
       newEntries[index] = {

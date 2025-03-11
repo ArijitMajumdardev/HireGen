@@ -11,13 +11,13 @@ declare type Experience = {
   };
   
   declare type Education = {
-    id: number;
-    universityName: string;
-    startDate: string;
-    endDate: string;
-    degree: string;
-    major: string;
-    description: string;
+    id?: number;
+    universityName?: string;
+    startDate?: string;
+    endDate?: string;
+    degree?: string;
+    major?: string;
+    description?: string;
   };
   
   declare type Skill = {
