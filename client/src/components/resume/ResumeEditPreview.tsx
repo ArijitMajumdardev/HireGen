@@ -7,7 +7,7 @@ import EducationalPreview from './preview/EducationalPreview'
 import SkillsPreview from './preview/SkillsPreview'
 import { useParams } from 'react-router-dom'
 
-const ResumrPreview = () => {
+const ResumePreview = () => {
   const { resumeInfo } = useResumeInfo()
 
   return (
@@ -29,4 +29,4 @@ const ResumrPreview = () => {
   )
 }
 
-export default ResumrPreview
+export default ResumePreview

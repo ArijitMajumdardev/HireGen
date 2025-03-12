@@ -66,11 +66,16 @@ const ResumePDF = ({ resumeInfo }: { resumeInfo: IResumeInfo | undefined }) => {
                   }}
                 >
                   {exp.title}
+                    </Text>
+                    <View style={{width:"100%",flexDirection:'row', justifyContent:'space-between'}}> 
+                <Text style={styles.text}>
+                  {exp.companyName}, {exp.city}, {exp.state} 
                 </Text>
                 <Text style={styles.text}>
-                  {exp.companyName}, {exp.city}, {exp.state} | {exp.startDate} -{" "}
+                  {exp.startDate} -{" "}
                   {exp.endDate}
                 </Text>
+                    </View>
                 <Text style={styles.text}>{exp.workSummery}</Text>
               </View>
             ))}
@@ -102,10 +107,15 @@ const ResumePDF = ({ resumeInfo }: { resumeInfo: IResumeInfo | undefined }) => {
                   }}
                 >
                   {edu.universityName}
-                </Text>
+                    </Text>
+                    <View style={{width:"100%",flexDirection:'row', justifyContent:'space-between'}}>
                 <Text style={styles.text}>
-                  {edu.degree} in {edu.major} | {edu.startDate} - {edu.endDate}
-                </Text>
+                  {edu.degree} in {edu.major} 
+                        </Text>
+                <Text style={styles.text}>
+                 {edu.startDate} - {edu.endDate}
+                        </Text>
+                        </View>
                 <Text style={styles.text}>{edu.description}</Text>
               </View>
             ))}
@@ -129,8 +139,8 @@ const ResumePDF = ({ resumeInfo }: { resumeInfo: IResumeInfo | undefined }) => {
 
             <View style={styles.skillList}>
               {resumeInfo?.skills.map((skill, index) => (
-                <View key={index} style={{ marginBottom: 3 }}>
-                  <Text style={styles.text}>{skill.name}</Text>
+                <View key={index} style={{ width:'50%',marginBottom: 20 ,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                      <Text style={{ ...styles.text,marginLeft:10 }}>{skill.name}</Text>
                   <View style={styles.skillBar}>
                     <View
                       style={{

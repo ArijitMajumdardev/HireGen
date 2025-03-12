@@ -1,41 +1,81 @@
 import React, { useEffect, useState } from "react";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink} from "@react-pdf/renderer";
 import ResumePDF from "@/components/resume/pdf/ResumePDF";
 import { ResumeInfoContext } from "@/context/ResumeInfoProvider";
 import { useParams } from "react-router-dom";
 import API from "@/lib/ServerAPI";
-import ResumrPreview from "@/components/resume/ResumeEditPreview";
+import ResumePreview from "@/components/resume/ResumeEditPreview";
+import { Button } from "@/components/ui/button";
+import { RWebShare } from 'react-web-share'
 
 const ResumeView = () => {
   const param = useParams();
   const [resumeInfo, setResumeInfo] = useState<IResumeInfo | undefined>();
   const resumeId = param.id;
-  let resumeTitle;
   useEffect(() => {
     const getResume = async () => {
       try {
         const response = await API.get(`/get-resume/${resumeId}`);
-        console.log(response.data);
         setResumeInfo(response.data);
-        resumeTitle = response.data.resumeTitle;
       } catch (error) {}
     };
     getResume();
   }, []);
+    
+
+    
+    
   return (
     <div className="w-full min-h-screen">
       <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
-        <div className="w-2/4 m-auto">
+        {/* <div className="w-2/4 m-auto">
           <ResumrPreview />
         </div>
-        {/* <PDFDownloadLink document={<ResumePDF resumeInfo={resumeInfo} />} fileName="resume.pdf">
+        <PDFDownloadLink document={<ResumePDF resumeInfo={resumeInfo} />} fileName={resumeInfo?.resumeTitle+"_Resume"}>
     {({ loading }) => (loading ? "Generating PDF..." : "Download Resume")}
-            </PDFDownloadLink> */}
+            </PDFDownloadLink>
         <div className="h-[150vh]">
           <PDFViewer width={"100%"} height={"100%"}>
             <ResumePDF resumeInfo={resumeInfo} />
           </PDFViewer>
+        </div> */}
+              
+
+              <div className='my-10 mx-10 md:mx-20 lg:mx-36'>
+            <h2 className='text-center text-2xl font-medium'>
+                Your Resume is ready ! </h2>
+                <p className='text-center text-gray-400'>Now you are ready to download your resume and you can share unique 
+                    resume url  </p>
+            <div className='flex justify-between px-44 my-10'>
+                      <Button >
+                      <PDFDownloadLink document={<ResumePDF resumeInfo={resumeInfo} />} fileName={resumeInfo?.resumeTitle+"_Resume"}>
+    {({ loading }) => (loading ? "Generating PDF..." : "Download Resume")}
+            </PDFDownloadLink>
+                </Button>
+               
+                <RWebShare
+        data={{
+          text: "Hello Everyone, This is my resume please open url to see it",
+          url: import.meta.env.VITE_BASE_URL+"my-resume/"+resumeId+"/view",
+          title: resumeInfo?.firstName+" "+resumeInfo?.lastName+" resume",
+        }}
+        onClick={() => console.log("shared successfully!")}
+                      >
+                          <Button>Share</Button>
+                      </RWebShare>
+                      
+
+            </div>
         </div>
+            
+       
+        <div className='my-10 mx-10 md:mx-20 lg:mx-36'>
+        <div id="print-area" >
+                <ResumePreview/>
+            </div>
+            </div>
+              
+
       </ResumeInfoContext.Provider>
     </div>
   );

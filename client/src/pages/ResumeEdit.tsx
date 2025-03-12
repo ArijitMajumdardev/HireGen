@@ -1,5 +1,5 @@
 import ResumeForm from '@/components/resume/ResumeEditForm'
-import ResumrPreview from '@/components/resume/ResumeEditPreview'
+import ResumePreview from '@/components/resume/ResumeEditPreview'
 import { ResumeInfoContext} from '@/context/ResumeInfoProvider'
 import dummy from '@/Data/dummy'
 import API from '@/lib/ServerAPI'
@@ -38,7 +38,7 @@ useEffect(() => {
       
     <div className=' grid grid-cols-1 md:grid-cols-2 gap-10 p-10'>
         <ResumeForm resumeId={param.id as string}  />
-      <ResumrPreview/>
+      <ResumePreview/>
 
     </div>
  </ResumeInfoContext.Provider>

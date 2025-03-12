@@ -26,7 +26,8 @@ declare type Experience = {
     rating: number;
   };
   
-  declare type IResumeInfo = {
+declare type IResumeInfo = {
+  resumeTitle: string;
     firstName: string;
     lastName: string;
     jobTitle: string;
