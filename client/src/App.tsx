@@ -11,6 +11,7 @@ import { useEffect } from 'react'
 
 import API from './lib/ServerAPI'
 import ResumeEdit from './pages/ResumeEdit'
+import ResumeView from './pages/ResumeView'
 function App() {
 
   const { setIsLogged, setUser } = useAuthContext()
@@ -50,6 +51,7 @@ function App() {
           <Route path='/' element={<Home/>} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/resume/:id/edit' element={<ResumeEdit/>} />
+          <Route path='/my-resume/:id/view' element={<ResumeView/>} />
         </Routes>
         <Footer/>
       </Router>
