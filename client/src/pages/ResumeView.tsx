@@ -28,19 +28,6 @@ const ResumeView = () => {
   return (
     <div className="w-full min-h-screen">
       <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
-        {/* <div className="w-2/4 m-auto">
-          <ResumrPreview />
-        </div>
-        <PDFDownloadLink document={<ResumePDF resumeInfo={resumeInfo} />} fileName={resumeInfo?.resumeTitle+"_Resume"}>
-    {({ loading }) => (loading ? "Generating PDF..." : "Download Resume")}
-            </PDFDownloadLink>
-        <div className="h-[150vh]">
-          <PDFViewer width={"100%"} height={"100%"}>
-            <ResumePDF resumeInfo={resumeInfo} />
-          </PDFViewer>
-        </div> */}
-              
-
               <div className='my-10 mx-10 md:mx-20 lg:mx-36'>
             <h2 className='text-center text-2xl font-medium'>
                 Your Resume is ready ! </h2>
@@ -70,7 +57,7 @@ const ResumeView = () => {
             
        
         <div className='my-10 mx-10 md:mx-20 lg:mx-36'>
-        <div id="print-area" >
+        <div>
                 <ResumePreview/>
             </div>
             </div>

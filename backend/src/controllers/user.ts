@@ -59,7 +59,7 @@ const  handleUserLogin = async (c:Context) : Promise<any> => {
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) throw new HTTPException(401,{ message: "Invalid credentials"})
     
-        const token = jwt.sign({ userId: user.id }, c.env.JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ userId: user.id }, c.env.JWT_SECRET, { expiresIn: "7d" });
     
         return c.json({ token, user: { id: user.id, name: user.name, email: user.email } });
     } catch (error) {
