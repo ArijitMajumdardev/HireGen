@@ -80,36 +80,34 @@ const  handleUserDetail = async (c:Context) : Promise<any> => {
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       c.status(401)
-      return c.json({ message: "Unauthorized" }, 401);
+      throw new HTTPException(401,{ message: "Unauthorized" });
     }
     // const token = c.headers.authorization?.split(" ")[1];
     const token = authHeader.split(" ")[1];
     if (!token) {
       c.status(404)    
-      return c.json({ message: "Unauthorized" });
+      throw new HTTPException(404,{ message: "Unauthorized" });
     }
     const decoded: any = jwt.verify(token, c.env.JWT_SECRET);
     if (!decoded?.userId) {
 
       c.status(401)
-      return c.json({ message: "Invalid token" }, 401)
+      throw new HTTPException(401,{ message: "Invalid token" })
     }
-
+// const user = undefined
         const user = await prisma.user.findUnique({
           where: { id: decoded.userId },
           select: { id: true, name: true, email: true },
         });
     
-    if (!user) {
-      c.status(404)    
-      return c.json({ message: "User not found" });
+    if (!user) {    
+      throw new HTTPException(404,{ message: "User not found" });
     }
     
     c.status(200)
         return c.json(user);
   } catch {
-    c.status(401)
-        return c.json({ message: "Invalid token" });
+    throw new HTTPException(401,{ message: "Invalid token" });
       }
     
 }

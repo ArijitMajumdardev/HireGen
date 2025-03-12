@@ -123,6 +123,28 @@ const Get_Resume = async (c: Context): Promise<any> => {
   }
 };
 
+const Get_Shared_Resume = async (c: Context): Promise<any> => {
+  try {
+    const prisma = getPrisma(c.env.DATABASE_URL);
+    const resumeId = c.req.param("resumeId");
+
+    console.log("rese", resumeId);
+    const response = await prisma.resume.findUnique({
+      where: {
+        id: resumeId,
+      },
+      include: { experiences: true, education: true,skills: true },
+    });
+
+    console.log(response);
+
+    return c.json(response);
+  } catch (error) {
+    c.status(404);
+    throw new HTTPException(404, { message: "Internal Server Error" });
+  }
+};
+
 const updateExperience = async (c: Context): Promise<any> => {
   try {
     const prisma = getPrisma(c.env.DATABASE_URL);
@@ -276,5 +298,5 @@ export {
   Get_Resume,
   updateExperience,
   updateEducation,
-  updateSkills,deleteSkill
+  updateSkills,deleteSkill,Get_Shared_Resume
 };
