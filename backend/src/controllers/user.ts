@@ -63,8 +63,9 @@ const  handleUserLogin = async (c:Context) : Promise<any> => {
     
         return c.json({ token, user: { id: user.id, name: user.name, email: user.email } });
     } catch (error) {
-        throw new HTTPException(401,{ message: error as string})
-      }
+      console.error("Login Error:", error);
+      throw new HTTPException(401, { message: error instanceof Error ? error.message : "Unknown error" });
+    }
     
 }
 const  handleUserDetail = async (c:Context) : Promise<any> => {
@@ -87,9 +88,9 @@ const  handleUserDetail = async (c:Context) : Promise<any> => {
       c.status(404)    
       return c.json({ message: "Unauthorized" });
     }
-    
     const decoded: any = jwt.verify(token, c.env.JWT_SECRET);
     if (!decoded?.userId) {
+
       c.status(401)
       return c.json({ message: "Invalid token" }, 401)
     }
