@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import API from './lib/ServerAPI'
 import ResumeEdit from './pages/ResumeEdit'
 import ResumeView from './pages/ResumeView'
+import SharedResumePage from './pages/SharedResumePage'
 function App() {
 
   const { setIsLogged, setUser } = useAuthContext()
@@ -29,7 +30,7 @@ function App() {
         setIsLogged(true)
        }
       } catch (error) {
-        
+        console.log("LogIn")
       }
     }
 
@@ -52,6 +53,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/resume/:id/edit' element={<ResumeEdit/>} />
           <Route path='/my-resume/:id/view' element={<ResumeView/>} />
+          <Route path='/share/:id/view' element={<SharedResumePage/>} />
         </Routes>
         <Footer/>
       </Router>
