@@ -14,6 +14,7 @@ const app = new Hono<
   Bindings: {
     DATABASE_URL: string
     JWT_SECRET: string
+    CORS_ORIGIN : string
   }
   Variables: {
     userId: string
@@ -22,8 +23,24 @@ const app = new Hono<
 >()
 
 app.use(logger())
-app.use('*', cors())
+// app.use('*', cors())
+app.use('*', async (c, next) => {
+  const envOrigins = c.env?.CORS_ORIGIN || "http://localhost:5173"
+  const allowedOrigins = envOrigins.split(",").map((origin) => origin.trim())
 
+  const corsMiddlewareHandler = cors({
+    origin: (origin) => (allowedOrigins.includes(origin) ? origin : ""),
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  });
+
+  return corsMiddlewareHandler(c, next);
+});
+
+
+
+app.options("*", (c) => c.text("OK", 200));
 
 
 app.post('/signup',handleUserSignup)
