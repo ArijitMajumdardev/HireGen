@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "backend",
+  "name": "resume-gen-backend",
   "main": "src/index.ts",
   "compatibility_date": "2025-02-07",
   "compatibility_flags": [
