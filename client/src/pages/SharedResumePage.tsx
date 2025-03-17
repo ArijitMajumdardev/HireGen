@@ -13,7 +13,7 @@ const SharedResumePage = () => {
       const getResume = async () => {
           try {
 
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}share/get-resume/${resumeId}`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/share/get-resume/${resumeId}`);
             console.log("response",response)
           setResumeInfo(response.data);
         } catch (error) {}
