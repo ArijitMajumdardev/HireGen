@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { SetStateAction } from 'react'
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText } from "lucide-react";
 import { IResumeList } from '@/pages/Dashboard';
 import { Link } from 'react-router-dom';
+import DropDownResumeCard from './DropDownResumeCard';
 
 
 const formatDate = (isoString: string) => {
@@ -17,7 +18,7 @@ const formatDate = (isoString: string) => {
   };
 
   
-const ResumeCard = ({resumeList}:{resumeList:IResumeList[]}) => {
+const ResumeCard = ({resumeList,setResumeList}:{resumeList:IResumeList[],setResumeList:React.Dispatch<SetStateAction<IResumeList[]>>}) => {
   return (
       <div className='mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 '>
           {
@@ -26,7 +27,8 @@ const ResumeCard = ({resumeList}:{resumeList:IResumeList[]}) => {
           key={index}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.2 }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
+            className='relative'
           >
               <Link to={`/resume/${resume.id}/edit`}>
               <Card>
@@ -39,7 +41,9 @@ const ResumeCard = ({resumeList}:{resumeList:IResumeList[]}) => {
                 </CardContent>
               </Card>
             </Link>
-            </motion.div>
+            <DropDownResumeCard className="absolute top-2 right-1" setResumeList={setResumeList} resume={resume} index ={index} />
+          </motion.div>
+          
 
         ))}
     </div>

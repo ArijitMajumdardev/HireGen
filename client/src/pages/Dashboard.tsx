@@ -112,7 +112,7 @@ export default function Dashboard() {
         ))} */}
 
       </div>
-      <ResumeCard resumeList={resumeList} />
+      <ResumeCard resumeList={resumeList} setResumeList={setResumeList} />
 
       <CreateResumeDialog openDialog={openDialog} setOpenDialog={setOpenDialog} />
     </motion.div>
