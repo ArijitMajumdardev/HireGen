@@ -2,7 +2,7 @@ import {  Context, Hono } from 'hono'
 import { handleUserDetail, handleUserLogin, handleUserSignup } from './controllers/user'
 import { cors } from 'hono/cors'
 import { handle_Auth_Middleware } from './middlewares/authMiddleware'
-import { deleteSkill, Get_Resume, Get_Shared_Resume, GetResumeList, handleCreateResume, updateEducation, updateExperience, updateResume, updateSkills } from './controllers/resume'
+import { deleteResume, deleteSkill, Get_Resume, Get_Shared_Resume, GetResumeList, handleCreateResume, updateEducation, updateExperience, updateResume, updateSkills } from './controllers/resume'
 import { logger } from 'hono/logger'
 // import { prisma } from '../prisma/PrismaClient'
 
@@ -56,6 +56,7 @@ app.put("/update-experience",handle_Auth_Middleware,updateExperience)
 app.put("/update-education",handle_Auth_Middleware,updateEducation)
 app.put("/update-skills",handle_Auth_Middleware,updateSkills)
 app.delete("/delete-skills",handle_Auth_Middleware,deleteSkill)
+app.delete("/delete-resume/:resumeId",handle_Auth_Middleware,deleteResume)
 
 
 

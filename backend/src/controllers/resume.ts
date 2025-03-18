@@ -30,8 +30,8 @@ const handleCreateResume = async (c: Context): Promise<any> => {
           create: defaultData.education,
         },
         skills: {
-          create: defaultData.skills
-        }
+          create: defaultData.skills,
+        },
       },
       include: { experiences: true, education: true, skills: true },
     });
@@ -111,7 +111,7 @@ const Get_Resume = async (c: Context): Promise<any> => {
       where: {
         id: resumeId,
       },
-      include: { experiences: true, education: true,skills: true },
+      include: { experiences: true, education: true, skills: true },
     });
 
     console.log(response);
@@ -133,7 +133,7 @@ const Get_Shared_Resume = async (c: Context): Promise<any> => {
       where: {
         id: resumeId,
       },
-      include: { experiences: true, education: true,skills: true },
+      include: { experiences: true, education: true, skills: true },
     });
 
     console.log(response);
@@ -251,7 +251,7 @@ const updateSkills = async (c: Context): Promise<any> => {
           },
           update: {
             name: sk.name,
-            rating: sk.rating
+            rating: sk.rating,
           },
           create: {
             name: sk.name,
@@ -271,16 +271,16 @@ const updateSkills = async (c: Context): Promise<any> => {
   }
 };
 
-const deleteSkill = async (c: Context): Promise<any>=>{
+const deleteSkill = async (c: Context): Promise<any> => {
   try {
     const prisma = getPrisma(c.env.DATABASE_URL);
-    const { skillId}  = await c.req.json();
-console.log("llllll  ",skillId)
-  await prisma.skills.delete({
+    const { skillId } = await c.req.json();
+    console.log("llllll  ", skillId);
+    await prisma.skills.delete({
       where: {
-        id:skillId
-      }
-    })
+        id: skillId,
+      },
+    });
 
     c.status(200);
     return c.json({ message: "Successfully removed" });
@@ -289,7 +289,37 @@ console.log("llllll  ",skillId)
     console.log(error);
     throw new HTTPException(400, { message: error as string });
   }
-}
+};
+const deleteResume = async (c: Context): Promise<any> => {
+  try {
+    const prisma = getPrisma(c.env.DATABASE_URL);
+    const resumeId = c.req.param("resumeId");
+    const { email } = c.get("user");
+    const response = await prisma.resume.findUnique({
+      where: {
+        id: resumeId,
+        userEmail:email
+      }
+    });
+
+    if (response) {
+      await prisma.resume.delete({
+        where: {
+          id:resumeId
+        }
+      })
+      c.status(200);
+      return c.json({ message: "Successfully removed" });
+    } else {
+      c.status(404);
+      throw new HTTPException(400, { message: "You are not authorized" });
+    }
+  } catch (error) {
+    c.status(400);
+    console.log(error);
+    throw new HTTPException(400, { message: error as string });
+  }
+};
 
 export {
   handleCreateResume,
@@ -298,5 +328,8 @@ export {
   Get_Resume,
   updateExperience,
   updateEducation,
-  updateSkills,deleteSkill,Get_Shared_Resume
+  updateSkills,
+  deleteSkill,
+  Get_Shared_Resume,
+  deleteResume
 };
