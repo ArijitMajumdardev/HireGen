@@ -1,5 +1,4 @@
 import { useResumeInfo } from "@/context/ResumeInfoProvider";
-import React from "react";
 import { useState } from "react";
 import {
   BtnBold,
@@ -9,7 +8,6 @@ import {
   BtnNumberedList,
   BtnStrikeThrough,
   BtnUnderline,
-  ContentEditableEvent,
   Editor,
   EditorProvider,
   Separator,
@@ -33,7 +31,7 @@ export const RichTextEditor = ({
   onRichTextEditorChange: (value: string) => void;
 }) => {
   const [value, setValue] = useState(defaultValue);
-  const { resumeInfo, setResumeInfo } = useResumeInfo();
+  const { resumeInfo} = useResumeInfo();
   const [loading, setLoading] = useState(false);
 
   const GenerateSummeryFromAI = async () => {

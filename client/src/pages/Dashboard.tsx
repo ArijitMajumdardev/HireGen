@@ -1,7 +1,7 @@
 
 import CreateResumeDialog from "@/components/custom/CreateResumeDialog";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Plus, FileText } from "lucide-react";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Plus} from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import API from "@/lib/ServerAPI";

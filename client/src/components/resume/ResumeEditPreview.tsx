@@ -1,11 +1,9 @@
 import { useResumeInfo } from '@/context/ResumeInfoProvider'
-import React from 'react'
 import PersonalDetailPreview from './preview/PersonalDetaillPreview'
 import SummaryPreview from './preview/SummaryPreview'
 import ExperiencePreview from './preview/ExperiencePreview'
 import EducationalPreview from './preview/EducationalPreview'
 import SkillsPreview from './preview/SkillsPreview'
-import { useParams } from 'react-router-dom'
 
 const ResumePreview = () => {
   const { resumeInfo } = useResumeInfo()

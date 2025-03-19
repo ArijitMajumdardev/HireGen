@@ -1,6 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import SignUpDialog from "./SignUpDialog";
 import { useAuthContext } from "@/context/AuthProvider";

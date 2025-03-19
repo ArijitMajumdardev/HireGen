@@ -4,12 +4,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import API from "@/lib/ServerAPI";
 import { cn } from "@/lib/utils";
-import { IResumeList } from "@/pages/Dashboard";
 import { Menu } from "lucide-react";
-import { SetStateAction, useState } from "react";
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const DropDownHeader = ({

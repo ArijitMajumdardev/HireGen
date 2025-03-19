@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import  { useState } from 'react'
 import PersonalDetail from './form/PersonalDetail'
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { Button } from '../ui/button';
-import Home from '@/pages/Home';
 import { ArrowLeft, ArrowRight, LayoutGrid } from 'lucide-react';
 import Summary from './form/Summary';
 import Experience from './form/Experience';
 import Education from './form/Education';
 import Skills from './form/Skills';
-import dummy from '@/Data/dummy';
-import API from '@/lib/ServerAPI';
+
 
 const ResumeForm = ({resumeId}:{resumeId:string}) => {
   const [activeFormIndex, setActiveFormIndex] = useState(1);

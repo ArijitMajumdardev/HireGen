@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Header from './components/custom/Header'
 import Footer from './components/custom/Footer'
-import  toast, { Toaster } from 'react-hot-toast';
+import  { Toaster } from 'react-hot-toast';
 import { useAuthContext } from './context/AuthProvider'
 import { useEffect } from 'react'
 

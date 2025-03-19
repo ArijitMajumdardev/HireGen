@@ -5,7 +5,7 @@ import {
     DialogHeader,
     DialogTitle,
   } from "@/components/ui/dialog";
-  import React, { useEffect, useState } from "react";
+  import React, { useState } from "react";
   import { Input } from "../ui/input";
   import { Button } from "../ui/button";
 import axios from "axios";
@@ -28,7 +28,7 @@ import toast from "react-hot-toast";
     });
   
     const [isLogin, setIsLogin] = useState(false);
-    const {user,setUser,setIsLogged} = useAuthContext()
+    const {setUser,setIsLogged} = useAuthContext()
     const navigate = useNavigate()
     const closeDialog = () => setOpenDialog(false);
   
