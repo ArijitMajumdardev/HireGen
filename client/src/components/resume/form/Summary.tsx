@@ -11,7 +11,6 @@ import { useParams } from 'react-router-dom';
 const prompt="Job Title: {jobTitle} , Depends on job title give me list of  summery for 3 experience level, Mid Level and Freasher level in 3 -4 lines in array format, With summery and experience_level Field in JSON Format with summaries as the key for array"
 const Summary = ({ enabledNext }: { enabledNext: React.Dispatch<boolean> }) => {
   const { resumeInfo, setResumeInfo } = useResumeInfo()
-  const [summary,setSummary]=useState<string>();
   const [loading,setLoading]=useState(false);
   const params = useParams();
   const resumeId = params.id

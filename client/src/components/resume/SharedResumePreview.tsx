@@ -1,4 +1,3 @@
-import React from 'react'
 import PersonalDetailPreview from './preview/PersonalDetaillPreview'
 import SummaryPreview from './preview/SummaryPreview'
 import ExperiencePreview from './preview/ExperiencePreview'

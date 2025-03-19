@@ -1,4 +1,3 @@
-import React from 'react'
 
 function SummaryPreview({resumeInfo}:{resumeInfo:IResumeInfo|undefined}) {
   return (

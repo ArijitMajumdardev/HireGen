@@ -3,9 +3,8 @@ import { Input } from '@/components/ui/input';
 import { useResumeInfo } from '@/context/ResumeInfoProvider'
 import API from '@/lib/ServerAPI';
 import { LoaderCircle } from 'lucide-react';
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import toast from 'react-hot-toast';
-import { useParams } from 'react-router-dom';
 
 interface IformData{
   firstName: string | undefined;
@@ -18,7 +17,6 @@ interface IformData{
 }
 
 const PersonalDetail = ({enabledNext,resumeId}:{enabledNext:React.Dispatch<boolean>,resumeId:string}) => {
-  const params=useParams();
   const { resumeInfo, setResumeInfo } = useResumeInfo()
   const [formData, setFormData] = useState<IformData>({
     firstName: resumeInfo?.firstName,

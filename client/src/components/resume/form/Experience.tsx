@@ -3,11 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useResumeInfo } from "@/context/ResumeInfoProvider";
 import API from "@/lib/ServerAPI";
-import { IterationCcw, LoaderCircle } from "lucide-react";
-import React, { useContext, useEffect, useState } from "react";
+import {  LoaderCircle } from "lucide-react";
+import React, {  useState } from "react";
 import toast from "react-hot-toast";
-import { useParams } from "react-router-dom";
-import { ContentEditableEvent } from "react-simple-wysiwyg";
+
 
 const formField = {
   title: "",
@@ -19,10 +18,6 @@ const formField = {
   workSummery: "",
 };
 
-interface IexperienceList {
-  updated: Experience[];
-  newAdded: Experience[];
-}
 
 const Experience = ({
   enabledNext,

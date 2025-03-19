@@ -1,5 +1,5 @@
 
-import { createContext, ReactNode, SetStateAction, useContext, useState } from "react";
+import { createContext, SetStateAction, useContext } from "react";
 
 
 export interface IResumeContext{

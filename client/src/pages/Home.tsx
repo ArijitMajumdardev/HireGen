@@ -1,5 +1,3 @@
-
-import SignUpDialog from "@/components/custom/SignUpDialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuthContext } from "@/context/AuthProvider";

@@ -1,9 +1,8 @@
 import ResumeForm from '@/components/resume/ResumeEditForm'
 import ResumePreview from '@/components/resume/ResumeEditPreview'
 import { ResumeInfoContext} from '@/context/ResumeInfoProvider'
-import dummy from '@/Data/dummy'
 import API from '@/lib/ServerAPI'
-import  React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 // interface ResumeInfo{

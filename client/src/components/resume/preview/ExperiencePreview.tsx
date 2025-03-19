@@ -1,4 +1,3 @@
-import React from 'react'
 
 function ExperiencePreview({resumeInfo}:{resumeInfo:IResumeInfo|undefined}) {
   return (

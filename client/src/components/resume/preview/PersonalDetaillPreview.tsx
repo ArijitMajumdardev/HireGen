@@ -1,4 +1,3 @@
-import React from 'react'
 
 function PersonalDetailPreview({resumeInfo}:{resumeInfo:IResumeInfo|undefined}) {
   return (
