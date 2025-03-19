@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const DropDownResumeCard = ({ className,setResumeList,resume }: { className: string,setResumeList:React.Dispatch<SetStateAction<IResumeList[]>>,resume:IResumeList ,index:number}) => {
-  const [loading,setLoading] = useState(false)
+  const [,setLoading] = useState(false)
   const handleResumeDelete = async ()=>{
     try {
       setLoading(true);
