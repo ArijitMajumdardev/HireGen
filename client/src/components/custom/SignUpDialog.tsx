@@ -62,7 +62,7 @@ import toast from "react-hot-toast";
             setUser({email:data.user.email , name:data.user.name})
             setIsLogged(true)
             closeDialog()
-            navigate('/dashboard')
+            navigate('/')
             toast.success("Logged in Successfully!")
     
 

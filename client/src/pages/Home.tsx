@@ -32,11 +32,18 @@ export default function Home() {
           Generate professional resumes effortlessly using AI. No design skills required!
         </p>{
           isLogged ?
+            <div className=" w-[35vw] flex justify-evenly">
             <Link to={"/dashboard"}>
-            <Button className="mt-6 flex items-center gap-2" >
-          Create Resume <ArrowRight className="w-4 h-4" />
+            <Button className="mt-6 p-6 flex items-center gap-2" >
+          Create Resume 
         </Button>
             </Link>
+            <Link to={"/interview"}>
+            <Button className="mt-6 p-6 flex items-center gap-2 bg-orange-200 text-black hover:bg-orange-100" >
+          Start an Interview 
+        </Button>
+              </Link>
+            </div>
           :<Button className="mt-6 flex items-center gap-2" onClick={HandleLoginDialog}>
           Get Started <ArrowRight className="w-4 h-4" />
         </Button>
