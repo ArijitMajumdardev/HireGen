@@ -1,5 +1,7 @@
+import InterviewCard from "@/components/custom/InterviewCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { dummyInterviews } from "@/constants/DummyData";
 import { useAuthContext } from "@/context/AuthProvider";
 import { motion } from "framer-motion";
 import { ArrowRight, FileText, Rocket, Sparkles } from "lucide-react";
@@ -19,7 +21,7 @@ export default function Home() {
     
 
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center text-center py-20 px-6">
+      <section className="flex flex-col items-center justify-center text-center py-48 px-6">
         <motion.h1 
           className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
           initial={{ opacity: 0, y: -20 }}
@@ -32,7 +34,7 @@ export default function Home() {
           Generate professional resumes effortlessly using AI. No design skills required!
         </p>{
           isLogged ?
-            <div className=" w-[35vw] flex justify-evenly">
+            <div className=" w-[35vw] flex flex-col items-center md:flex-row md:justify-evenly md:gap-3">
             <Link to={"/dashboard"}>
             <Button className="mt-6 p-6 flex items-center gap-2" >
           Create Resume 
@@ -49,6 +51,16 @@ export default function Home() {
         </Button>
         }
       </section>
+
+      {/* Your past interview sections */}
+      {
+        isLogged ?
+        <section className="py-20 px-6  grid grid-cols-3 gap-5">
+            {dummyInterviews.map((interview) => (
+              <InterviewCard {...interview} />
+          ))}
+        </section>:<></>
+      }
 
       {/* How It Works Section */}
       <section id="how-it-works" className="py-20 px-6 bg-gray-100">
