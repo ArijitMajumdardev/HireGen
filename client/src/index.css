@@ -206,3 +206,65 @@ button:focus-visible {
     @apply bg-background text-foreground;
   }
 }
+
+.card-interview {
+  @apply bg-[#0f172a] rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between border-zinc-500 border-2;
+
+  .badge-text {
+    @apply text-sm font-semibold capitalize;
+  }
+}
+
+.tech-tooltip {
+  @apply absolute bottom-full mb-1 hidden group-hover:flex px-2 py-1 text-xs text-white bg-gray-800 rounded-md shadow-md;
+}
+.interview-text {
+  @apply text-lg text-center text-white;
+}
+
+  @layer utilities {
+    .card-gradient{
+      @apply bg-[#273469]
+    }
+    .dark-gradient {
+      @apply bg-gradient-to-b from-[#1A1C20] to-[#08090D];
+    }
+  
+    .border-gradient {
+      @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
+    }
+  
+    .pattern {
+      @apply bg-[url('/pattern.png')] bg-top bg-no-repeat;
+    }
+  
+    .blue-gradient-dark {
+      @apply bg-gradient-to-b from-[#171532] to-[#08090D];
+    }
+  
+    .blue-gradient {
+      @apply bg-gradient-to-l from-[#FFFFFF] to-[#CAC5FE];
+    }
+  
+    .flex-center {
+      @apply flex items-center justify-center;
+    }
+  
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  
