@@ -36,12 +36,12 @@ export default function Home() {
           isLogged ?
             <div className=" w-[35vw] flex flex-col items-center md:flex-row md:justify-evenly md:gap-3">
             <Link to={"/dashboard"}>
-            <Button className="mt-6 p-6 flex items-center gap-2" >
+            <Button className="mt-6 p-6 flex items-center gap-2 border-zinc-500 border-2" >
           Create Resume 
         </Button>
             </Link>
             <Link to={"/interview"}>
-            <Button className="mt-6 p-6 flex items-center gap-2 bg-orange-200 text-black hover:bg-orange-100" >
+            <Button className="mt-6 p-6 flex items-center gap-2 bg-[#4e7aff] text-white hover:bg-[#658CFF] border-zinc-400 border" >
           Start an Interview 
         </Button>
               </Link>
