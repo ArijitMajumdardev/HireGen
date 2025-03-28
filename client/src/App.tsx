@@ -27,7 +27,7 @@ function App() {
         const res = await API.get('/user-detail')
         console.log(res)
         if (res.status == 200) {
-          setUser({ email: res.data.email, name: res.data.name })
+          setUser({ email: res.data.email, name: res.data.name ,id:res.data.id })
         setIsLogged(true)
        }
       } catch (error) {

@@ -7,14 +7,13 @@ const Interview = () => {
     return (
         <>
             <h3>Interview generation</h3>
-            <Agent/>
+          
 
-            {/* <Agent
+            <Agent
         userName={user?.name!}
-        userId={user?.id}
-        profileImage={user?.profileURL}
+        userId={user?.id!}
         type="generate"
-      /> */}
+      />
     
         </>
       );
