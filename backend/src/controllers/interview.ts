@@ -39,6 +39,10 @@ const handle_interview_generate = async (c: Context): Promise<any> => {
       finalized: true,
     };
 
+    await prisma.interview.create({
+      data: interview 
+    })
+
     c.status(200);
     return c.json({ message: "Interview Created Successfully ",interview });
   } catch (error) {

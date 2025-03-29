@@ -92,5 +92,5 @@ model Interview {
   userid    String
   finalized Boolean  @default(false)
   createdAt DateTime @default(now())
-  user      User     @relation("UserInterviewRelation", fields: [id], references: [id], onDelete: Cascade)
+  user      User     @relation("UserInterviewRelation", fields: [userid], references: [id], onDelete: Cascade)
 }
