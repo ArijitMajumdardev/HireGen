@@ -27,6 +27,7 @@ model User {
   password  String
   createdAt DateTime @default(now())
   resumes   Resume[] @relation("UserRelation")
+  interviews Interview[] @relation("UserInterviewRelation")
 }
 
 model Resume {
@@ -79,4 +80,16 @@ model Skills {
   rating   Int
   resumeId String
   resume   Resume @relation("ResumeSkillRelation", fields: [resumeId], references: [id], onDelete: Cascade)
+}
+
+model Interview {
+  id        String   @id @default(uuid())
+  type      String
+  role      String
+  level     String
+  techstack String[] // Array of strings
+  questions String[] // Array of questions
+  userid    String
+  finalized Boolean  @default(false)
+  user User @relation("UserInterviewRelation",fields: [id],references: [id],onDelete: Cascade)
 }
