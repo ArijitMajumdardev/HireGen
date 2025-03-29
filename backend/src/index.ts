@@ -4,6 +4,7 @@ import { cors } from 'hono/cors'
 import { handle_Auth_Middleware } from './middlewares/authMiddleware'
 import { deleteResume, deleteSkill, Get_Resume, Get_Shared_Resume, GetResumeList, handleCreateResume, updateEducation, updateExperience, updateResume, updateSkills } from './controllers/resume'
 import { logger } from 'hono/logger'
+import { handle_interview_generate } from './controllers/interview'
 // import { prisma } from '../prisma/PrismaClient'
 
 
@@ -14,7 +15,8 @@ const app = new Hono<
   Bindings: {
     DATABASE_URL: string
     JWT_SECRET: string
-    CORS_ORIGIN : string
+    CORS_ORIGIN: string
+    GOOGLE_GENERATIVE_AI_API_KEY: string
   }
   Variables: {
     userId: string
@@ -56,7 +58,9 @@ app.put("/update-experience",handle_Auth_Middleware,updateExperience)
 app.put("/update-education",handle_Auth_Middleware,updateEducation)
 app.put("/update-skills",handle_Auth_Middleware,updateSkills)
 app.delete("/delete-skills",handle_Auth_Middleware,deleteSkill)
-app.delete("/delete-resume/:resumeId",handle_Auth_Middleware,deleteResume)
+app.delete("/delete-resume/:resumeId", handle_Auth_Middleware, deleteResume)
+
+app.post('/vapi/generate',handle_interview_generate)
 
 
 

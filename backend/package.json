@@ -11,12 +11,14 @@
     "prisma": "npm run env prisma"
   },
   "dependencies": {
-    "@prisma/client": "^6.3.1",
+    "@ai-sdk/google": "^1.2.3",
+    "@prisma/client": "^6.5.0",
     "@prisma/extension-accelerate": "^1.2.1",
+    "ai": "^4.2.8",
     "bcryptjs": "^2.4.3",
     "hono": "^4.6.20",
     "jsonwebtoken": "^9.0.2",
-    "prisma": "^6.3.1"
+    "prisma": "^6.5.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250109.0",
