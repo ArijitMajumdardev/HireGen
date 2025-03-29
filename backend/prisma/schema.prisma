@@ -21,12 +21,12 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  resumes   Resume[] @relation("UserRelation")
+  id         String      @id @default(uuid())
+  name       String
+  email      String      @unique
+  password   String
+  createdAt  DateTime    @default(now())
+  resumes    Resume[]    @relation("UserRelation")
   interviews Interview[] @relation("UserInterviewRelation")
 }
 
@@ -91,5 +91,6 @@ model Interview {
   questions String[] // Array of questions
   userid    String
   finalized Boolean  @default(false)
-  user User @relation("UserInterviewRelation",fields: [id],references: [id],onDelete: Cascade)
+  createdAt DateTime @default(now())
+  user      User     @relation("UserInterviewRelation", fields: [id], references: [id], onDelete: Cascade)
 }
