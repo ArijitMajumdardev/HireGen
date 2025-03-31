@@ -298,16 +298,16 @@ const deleteResume = async (c: Context): Promise<any> => {
     const response = await prisma.resume.findUnique({
       where: {
         id: resumeId,
-        userEmail:email
-      }
+        userEmail: email,
+      },
     });
 
     if (response) {
       await prisma.resume.delete({
         where: {
-          id:resumeId
-        }
-      })
+          id: resumeId,
+        },
+      });
       c.status(200);
       return c.json({ message: "Successfully removed" });
     } else {
@@ -331,5 +331,5 @@ export {
   updateSkills,
   deleteSkill,
   Get_Shared_Resume,
-  deleteResume
+  deleteResume,
 };

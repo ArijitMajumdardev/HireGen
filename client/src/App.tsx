@@ -14,6 +14,7 @@ import ResumeEdit from './pages/ResumeEdit'
 import ResumeView from './pages/ResumeView'
 import SharedResumePage from './pages/SharedResumePage'
 import Interview from './pages/Interview'
+import InterviewDashboard from './pages/InterviewDashboard'
 function App() {
 
   const { setIsLogged, setUser } = useAuthContext()
@@ -56,6 +57,7 @@ function App() {
           <Route path='/my-resume/:id/view' element={<ResumeView/>} />
           <Route path='/share/:id/view' element={<SharedResumePage/>} />
           <Route path='/interview' element={<Interview/>} />
+          <Route path='/interview/dashboard' element={<InterviewDashboard/>} />
         </Routes>
         <Footer/>
       </Router>

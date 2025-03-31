@@ -217,7 +217,7 @@ button:focus-visible {
 
 
 .card-interview {
-  @apply bg-[#0f172a] rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between border-zinc-500 border-2;
+  @apply bg-black rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between border-zinc-800 border;
 
   .badge-text {
     @apply text-sm font-semibold capitalize;

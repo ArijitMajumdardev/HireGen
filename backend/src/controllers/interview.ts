@@ -62,12 +62,13 @@ const Get_User_Interviews = async (c: Context): Promise<any> => {
     const response = await prisma.interview.findMany({
       where: {
         userid: userid,
-      }, orderBy: {
-        createdAt:'desc'
-      }
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
-    c.status(500)
+    c.status(200);
     return c.json(response);
   } catch (error) {
     c.status(404);
