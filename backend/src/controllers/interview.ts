@@ -75,5 +75,25 @@ const Get_User_Interviews = async (c: Context): Promise<any> => {
     throw new HTTPException(404, { message: "Internal Server Error" });
   }
 };
+//Get Interview
 
-export { handle_interview_generate, Get_User_Interviews };
+const Get_Interview = async (c: Context): Promise<any> => {
+  try {
+    const prisma = getPrisma(c.env.DATABASE_URL);
+    const interviewId = c.req.param("id");
+
+    const response = await prisma.interview.findUnique({
+      where: {
+        id: interviewId,
+      },
+    });
+
+    c.status(200);
+    return c.json(response);
+  } catch (error) {
+    c.status(404);
+    throw new HTTPException(404, { message: "Internal Server Error" });
+  }
+};
+
+export { handle_interview_generate, Get_User_Interviews,Get_Interview };
