@@ -28,9 +28,9 @@ const InterviewCard =  ({
   }[normalizedType] || "bg-light-600";
 
   const feedback = '';
-      // const formattedDate = dayjs(
-      //   feedback?.createdAt || createdAt || Date.now()
-      // ).format("MMM D, YYYY");
+      const formattedDate = dayjs(
+        feedback?.createdAt || createdAt || Date.now()
+      ).format("MMM D, YYYY");
   return (
     <div className="card-border w-[360px] max-sm:w-full min-h-96 text-white ">
       <div className="card-interview">
@@ -64,7 +64,7 @@ const InterviewCard =  ({
                 height={22}
                 alt="calendar"
               />
-              {/* <p>{formattedDate}</p> */}
+              <p>{formattedDate}</p>
             </div>
 
             <div className="flex flex-row gap-2 items-center">
