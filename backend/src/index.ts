@@ -4,7 +4,7 @@ import { cors } from 'hono/cors'
 import { handle_Auth_Middleware } from './middlewares/authMiddleware'
 import { deleteResume, deleteSkill, Get_Resume, Get_Shared_Resume, GetResumeList, handleCreateResume, updateEducation, updateExperience, updateResume, updateSkills } from './controllers/resume'
 import { logger } from 'hono/logger'
-import { handle_interview_generate } from './controllers/interview'
+import { Get_User_Interviews, handle_interview_generate } from './controllers/interview'
 // import { prisma } from '../prisma/PrismaClient'
 
 
@@ -60,7 +60,8 @@ app.put("/update-skills",handle_Auth_Middleware,updateSkills)
 app.delete("/delete-skills",handle_Auth_Middleware,deleteSkill)
 app.delete("/delete-resume/:resumeId", handle_Auth_Middleware, deleteResume)
 
-app.post('/vapi/generate',handle_interview_generate)
+app.post('/vapi/generate',handle_Auth_Middleware,handle_interview_generate)
+app.get('/get-user-interviews/:userid',handle_Auth_Middleware,Get_User_Interviews)
 
 
 

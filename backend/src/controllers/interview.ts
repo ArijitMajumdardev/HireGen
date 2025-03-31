@@ -33,18 +33,18 @@ const handle_interview_generate = async (c: Context): Promise<any> => {
       role,
       type,
       level,
-      techstack: techstack.split(','),
+      techstack: techstack.split(","),
       questions: JSON.parse(questions),
       userid: userid,
       finalized: true,
     };
 
     await prisma.interview.create({
-      data: interview 
-    })
+      data: interview,
+    });
 
     c.status(200);
-    return c.json({ message: "Interview Created Successfully ",interview });
+    return c.json({ message: "Interview Created Successfully " });
   } catch (error) {
     c.status(500);
     console.log(error);
@@ -52,4 +52,27 @@ const handle_interview_generate = async (c: Context): Promise<any> => {
   }
 };
 
-export { handle_interview_generate };
+//Get all user Interviews
+
+const Get_User_Interviews = async (c: Context): Promise<any> => {
+  try {
+    const prisma = getPrisma(c.env.DATABASE_URL);
+    const userid = c.req.param("userid");
+
+    const response = await prisma.interview.findMany({
+      where: {
+        userid: userid,
+      }, orderBy: {
+        createdAt:'desc'
+      }
+    });
+
+    c.status(500)
+    return c.json(response);
+  } catch (error) {
+    c.status(404);
+    throw new HTTPException(404, { message: "Internal Server Error" });
+  }
+};
+
+export { handle_interview_generate, Get_User_Interviews };
