@@ -28,6 +28,7 @@ model User {
   createdAt  DateTime    @default(now())
   resumes    Resume[]    @relation("UserRelation")
   interviews Interview[] @relation("UserInterviewRelation")
+  Feedbacks  Feedback[]   @relation("FeedbackUserRelation")
 }
 
 model Resume {
@@ -92,5 +93,21 @@ model Interview {
   userid    String
   finalized Boolean  @default(false)
   createdAt DateTime @default(now())
+  feedback  Feedback? @relation("FeedbackInterviewRelation")
   user      User     @relation("UserInterviewRelation", fields: [userid], references: [id], onDelete: Cascade)
+}
+
+
+model Feedback {
+  id                   String   @id @default(uuid())
+  interviewId          String @unique
+  userId               String
+  totalScore          Int
+  categoryScores      Json
+  strengths           String[]
+  areasForImprovement String[]
+  finalAssessment     String
+  createdAt          DateTime @default(now())
+  user      User     @relation("FeedbackUserRelation", fields: [userId], references: [id], onDelete: Cascade)
+  interview Interview @relation("FeedbackInterviewRelation",fields: [interviewId],references: [id],onDelete: Cascade)
 }
