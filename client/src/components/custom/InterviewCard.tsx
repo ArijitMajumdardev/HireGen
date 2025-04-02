@@ -6,12 +6,13 @@ import { cn, getRandomInterviewCover } from '@/lib/utils';
 import DisplayTechIcons from './DisplayTechIcons';
 
 const InterviewCard =  ({
-  interviewId,
+  id,
   userId,
   role,
   type,
   techstack,
   createdAt,
+  feedback
 }: InterviewCardProps) => {
   // const feedback = 
   //   userId && interviewId
@@ -27,7 +28,6 @@ const InterviewCard =  ({
     Technical: "bg-light-800",
   }[normalizedType] || "bg-light-600";
 
-  const feedback = '';
       const formattedDate = dayjs(
         feedback?.createdAt || createdAt || Date.now()
       ).format("MMM D, YYYY");
@@ -87,8 +87,8 @@ const InterviewCard =  ({
             <Link
               to={
                 feedback
-                  ? `/interview/${interviewId}/feedback`
-                  : `/interview/${interviewId}`
+                  ? `/interview/${id}/feedback`
+                  : `/interview/${id}`
               }
             >
               {feedback ? "Check Feedback" : "View Interview"}

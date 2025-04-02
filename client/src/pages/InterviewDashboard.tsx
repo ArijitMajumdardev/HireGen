@@ -4,6 +4,7 @@ import { useAuthContext } from "@/context/AuthProvider";
 import API from "@/lib/ServerAPI";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 const InterviewDashboard = () => {
     const { user} = useAuthContext();
@@ -41,8 +42,8 @@ const InterviewDashboard = () => {
           {interviewList?.length as number > 0 ?
               <section className="py-16 px-6  grid grid-cols-3 gap-5">
               
-                  {interviewList?.map((interview) => (
-                      <InterviewCard {...interview} />
+                  {interviewList?.map((interview,index) => (
+                      <InterviewCard {...interview} key={index} />
                   ))
                   }
               </section> : (
