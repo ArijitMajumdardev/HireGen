@@ -106,20 +106,20 @@ const Handle_Interview_Feedback = async (c: Context): Promise<any> => {
     });
     const prisma = getPrisma(c.env.DATABASE_URL);
     const { data } = await c.req.json();
-    console.log("this is the data",data);
-    const {interviewId, userId, transcript} = data
+    console.log("this is the data", data);
+    const { interviewId, userId, transcript } = data;
     const formattedTranscript = transcript
       .map(
         (sentence: { role: string; content: string }) =>
           `- ${sentence.role}: ${sentence.content}\n`
       )
       .join("");
-      const { object } = await generateObject({
-        model: google("gemini-2.0-flash-001", {
-          structuredOutputs: false,
-        }),
-        schema: feedbackSchema,
-        prompt: `
+    const { object } = await generateObject({
+      model: google("gemini-2.0-flash-001", {
+        structuredOutputs: false,
+      }),
+      schema: feedbackSchema,
+      prompt: `
           You are an AI interviewer analyzing a mock interview. Your task is to evaluate the candidate based on structured categories. Be thorough and detailed in your analysis. Don't be lenient with the candidate. If there are mistakes or areas for improvement, point them out.
           Transcript:
           ${formattedTranscript}
@@ -131,40 +131,73 @@ const Handle_Interview_Feedback = async (c: Context): Promise<any> => {
           - **Cultural & Role Fit**: Alignment with company values and job role.
           - **Confidence & Clarity**: Confidence in responses, engagement, and clarity.
           `,
-        system:
-          "You are a professional interviewer analyzing a mock interview. Your task is to evaluate the candidate based on structured categories",
-      });
-    
-    
-      const feedback = {
-        interviewId: interviewId,
-        userId: userId,
-        totalScore: object.totalScore,
-        categoryScores: object.categoryScores,
-        strengths: object.strengths,
-        areasForImprovement: object.areasForImprovement,
-        finalAssessment: object.finalAssessment,
-        createdAt: new Date().toISOString(),
+      system:
+        "You are a professional interviewer analyzing a mock interview. Your task is to evaluate the candidate based on structured categories",
+    });
+
+    const feedback = {
+      interviewId: interviewId,
+      userId: userId,
+      totalScore: object.totalScore,
+      categoryScores: object.categoryScores,
+      strengths: object.strengths,
+      areasForImprovement: object.areasForImprovement,
+      finalAssessment: object.finalAssessment,
+      createdAt: new Date().toISOString(),
     };
-    
+
     const response = await prisma.feedback.upsert({
       where: {
         interviewId: interviewId,
-        userId:userId
+        userId: userId,
       },
       update: {
-       ...feedback
+        ...feedback,
       },
       create: {
-        ...feedback
-      }
-    })
-      
+        ...feedback,
+      },
+    });
+
     c.status(200);
-    return c.json({ success: true ,feedbackId: response.id });
+    return c.json({ success: true, feedbackId: response.id });
   } catch (error) {
     c.status(400);
     throw new HTTPException(400, { message: "Error saving feedback:" });
+  }
+};
+
+//Get Interview Feedback
+
+const Get_Interview_Feedback = async (c: Context): Promise<any> => {
+  try {
+    const prisma = getPrisma(c.env.DATABASE_URL);
+    const { data: feedbackId , userId } = await c.req.json();
+
+    const response = await prisma.feedback.findUnique({
+      where: {
+        id: feedbackId,
+      },
+    });
+
+   // If feedback does not exist, throw 404
+   if (!response) {
+    throw new HTTPException(404, { message: "Feedback not found" });
+  }
+
+  // If userId does not match, throw 403 Forbidden
+  if (response.userId !== userId) {
+    throw new HTTPException(403, { message: "You are not authorized to access this feedback" });
+  }
+
+    c.status(200);
+    return c.json(response);
+  } catch (error) {
+    if (error instanceof HTTPException) {
+      throw error; // Preserve the correct HTTP error (403, 404, etc.)
+    }
+    c.status(500);
+    throw new HTTPException(500, { message: "Internal Server Error" });
   }
 };
 
@@ -173,4 +206,5 @@ export {
   Get_User_Interviews,
   Get_Interview,
   Handle_Interview_Feedback,
+  Get_Interview_Feedback,
 };
