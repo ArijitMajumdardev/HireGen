@@ -21,6 +21,7 @@ import {
 import { logger } from "hono/logger";
 import {
   Get_Interview,
+  Handle_Interview_Feedback,
   Get_User_Interviews,
   handle_interview_generate,
 } from "./controllers/interview";
@@ -74,5 +75,6 @@ app.delete("/delete-resume/:resumeId", handle_Auth_Middleware, deleteResume);
 app.post("/vapi/generate", handle_Auth_Middleware, handle_interview_generate);
 app.get("/get-user-interviews/:userid",handle_Auth_Middleware,Get_User_Interviews);
 app.get("/get-interview/:id",handle_Auth_Middleware,Get_Interview);
+app.post("/interview/feedback",Handle_Interview_Feedback);
 
 export default app;
