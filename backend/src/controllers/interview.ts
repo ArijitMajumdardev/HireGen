@@ -67,6 +67,9 @@ const Get_User_Interviews = async (c: Context): Promise<any> => {
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        feedback:true
+      }
     });
 
     c.status(200);
