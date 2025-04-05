@@ -13,8 +13,10 @@ import API from './lib/ServerAPI'
 import ResumeEdit from './pages/ResumeEdit'
 import ResumeView from './pages/ResumeView'
 import SharedResumePage from './pages/SharedResumePage'
-import Interview from './pages/Interview'
 import InterviewDashboard from './pages/InterviewDashboard'
+import InterviewGeneration from './pages/InterviewGeneration'
+import InterviewSession from './pages/InterviewSession'
+import InterviewFeedback from './pages/Interview/Feedback'
 function App() {
 
   const { setIsLogged, setUser } = useAuthContext()
@@ -56,8 +58,10 @@ function App() {
           <Route path='/resume/:id/edit' element={<ResumeEdit/>} />
           <Route path='/my-resume/:id/view' element={<ResumeView/>} />
           <Route path='/share/:id/view' element={<SharedResumePage/>} />
-          <Route path='/interview' element={<Interview/>} />
+          <Route path='/interview/generate' element={<InterviewGeneration/>} />
           <Route path='/interview/dashboard' element={<InterviewDashboard/>} />
+          <Route path='/interview/:id' element={<InterviewSession/>} />
+          <Route path='/interview/:interviewId/feedback/:feedbackId' element={<InterviewFeedback/>} />
         </Routes>
         <Footer/>
       </Router>
