@@ -291,8 +291,15 @@ button:focus-visible {
   }
 }
 
+/* feedback page */
 
+.section-feedback {
+  @apply flex flex-col gap-8 w-[80vw] p-5 mx-auto max-sm:px-4 text-lg leading-7;
 
+  .buttons {
+    @apply flex w-full justify-evenly gap-4 max-sm:flex-col max-sm:items-center;
+  }
+}
 
 
 
