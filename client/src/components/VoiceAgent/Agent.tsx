@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
+import { interviewer } from "@/constants/DummyData";
+import API from "@/lib/ServerAPI";
+import toast from "react-hot-toast";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -15,16 +18,20 @@ const Agent = ({
   userName,
   userId,
   type,
+  questions,
+  interviewId,
 }: {
   userName: string;
   userId: string;
   type: string;
+  questions?: string[];
+  interviewId?: string;
 }) => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.INACTIVE);
   const [messages, setMessages] = useState<SavedMessage[]>([]);
   const [lastMessage, setLastMessage] = useState<string>("");
-const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     const onCallStart = () => {
       setCallStatus(CallStatus.ACTIVE);
@@ -71,31 +78,88 @@ const navigate = useNavigate()
     };
   }, []);
 
+  //Generate Interview Feedback
+  const handleGenerateFeedback = async (message: SavedMessage[]) => {
+    try {
+      const response = await API.post(
+        "/interview/feedback",
+        {
+          data: {
+            userId,
+            interviewId,
+            transcript: message, 
+          },
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const { success, feedbackId }: { success: boolean; feedbackId: string } = response.data;
+
+      if (success && feedbackId) {
+        navigate(`/interview/${interviewId}/feedback/${feedbackId}`);
+      } else {
+        
+        console.error("Error saving feedback: No feedbackId returned");
+        toast.error("Something went wrong");
+        navigate("/"); 
+      }
+    } catch (error) {
+
+      console.error("Error occurred while generating feedback:", error);
+      toast.error("Something went wrong");
+      navigate("/"); 
+    }
+  };
+
   useEffect(() => {
     if (messages.length > 0) {
       setLastMessage(messages[messages.length - 1].content);
     }
-    if(callStatus===CallStatus.FINISHED) navigate('/')
-    },[messages, callStatus,type, userId])
+    if (callStatus === CallStatus.FINISHED) {
+      if (type === "generate") {
+        navigate("/");
+      } else {
+        handleGenerateFeedback(messages);
+      }
+    }
+  }, [messages, callStatus, type, userId]);
 
   //handle call connect
   const handleCall = async () => {
-    setCallStatus(CallStatus.CONNECTING)
+    setCallStatus(CallStatus.CONNECTING);
 
-    await vapi.start(import.meta.env.VITE_VAPI_WORKFLOW_ID, {
-      variableValues: {
-        username: userName,
-        userid:userId
+    if (type === "generate") {
+      await vapi.start(import.meta.env.VITE_VAPI_WORKFLOW_ID, {
+        variableValues: {
+          username: userName,
+          userid: userId,
+        },
+      });
+    } else {
+      let formattedQuestions = "";
+      if (questions) {
+        formattedQuestions = questions
+          .map((question) => `- ${question}`)
+          .join("\n");
       }
-    })
-  }
+
+      await vapi.start(interviewer, {
+        variableValues: {
+          questions: formattedQuestions,
+        },
+      });
+    }
+  };
 
   //handle call disconnect
   const handleDisconnect = () => {
     setCallStatus(CallStatus.FINISHED);
     vapi.stop();
   };
-
 
   return (
     <>
