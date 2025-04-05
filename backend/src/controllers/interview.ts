@@ -68,8 +68,8 @@ const Get_User_Interviews = async (c: Context): Promise<any> => {
         createdAt: "desc",
       },
       include: {
-        feedback:true
-      }
+        feedback: true,
+      },
     });
 
     c.status(200);
@@ -173,25 +173,31 @@ const Handle_Interview_Feedback = async (c: Context): Promise<any> => {
 //Get Interview Feedback
 
 const Get_Interview_Feedback = async (c: Context): Promise<any> => {
+  console.log("aaaaaaaa");
   try {
     const prisma = getPrisma(c.env.DATABASE_URL);
-    const { data: feedbackId , userId } = await c.req.json();
-
+    const feedbackId = c.req.query("feedbackId");
+    const userId = c.req.query("userId");
+    if (!feedbackId || !userId) {
+      throw new HTTPException(400, { message: "Missing query parameters" });
+    }
     const response = await prisma.feedback.findUnique({
       where: {
         id: feedbackId,
       },
     });
 
-   // If feedback does not exist, throw 404
-   if (!response) {
-    throw new HTTPException(404, { message: "Feedback not found" });
-  }
+    //  // If feedback does not exist, throw 404
+    if (!response) {
+      throw new HTTPException(404, { message: "Feedback not found" });
+    }
 
-  // If userId does not match, throw 403 Forbidden
-  if (response.userId !== userId) {
-    throw new HTTPException(403, { message: "You are not authorized to access this feedback" });
-  }
+    // // If userId does not match, throw 403 Forbidden
+    if (response.userId !== userId) {
+      throw new HTTPException(403, {
+        message: "You are not authorized to access this feedback",
+      });
+    }
 
     c.status(200);
     return c.json(response);
@@ -199,7 +205,6 @@ const Get_Interview_Feedback = async (c: Context): Promise<any> => {
     if (error instanceof HTTPException) {
       throw error; // Preserve the correct HTTP error (403, 404, etc.)
     }
-    c.status(500);
     throw new HTTPException(500, { message: "Internal Server Error" });
   }
 };
