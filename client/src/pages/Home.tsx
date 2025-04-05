@@ -17,34 +17,40 @@ export default function Home() {
 
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col ">
     
 
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center text-center py-48 px-6">
-        <motion.h1 
-          className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+      <section className="flex flex-col items-center justify-center text-center py-36 px-6">
+      <button className=" rounded-full border-[#F0A7C3] border px-1 mb-10" >
+          #1 platform for career 
+        </button>
+
+        <h1 
+          className="text-4xl md:text-6xl font-bold text-white mb-4"
         >
-          Build Your Resume with AI in Minutes ✨
-        </motion.h1>
-        <p className="text-gray-600 max-w-lg text-lg">
-          Generate professional resumes effortlessly using AI. No design skills required!
+          Master Interviews & 
+          <br />
+          Resumes At <span className="bg-gradient-to-r from-[#F0A7C3] to-[#777AF1] bg-clip-text text-transparent">HireGen</span>
+        </h1>
+        <p className="text-gray-300 max-w-xl text-lg font-normal">
+        Practice AI-driven mock interviews, build standout resumes, and analyze your profile with smart AI insights – all in one place
         </p>{
           isLogged ?
             <div className=" w-[35vw] flex flex-col items-center md:flex-row md:justify-evenly md:gap-3">
+               <Link to={"/interview/generate"}>
+            <Button className="mt-6 p-6 rounded-full bg-[#777AF1]  hover:bg-[#9092f8] " >
+          Mock Interview 
+                </Button>
+                
+              </Link>
+
             <Link to={"/dashboard"}>
-            <Button className="mt-6 p-6 flex items-center gap-2 border-zinc-500 border-2" >
+            <Button className="mt-6 p-6 rounded-full border-[#F0A7C3] border" >
           Create Resume 
         </Button>
             </Link>
-            <Link to={"/interview/generate"}>
-            <Button className="mt-6 p-6 flex items-center gap-2 bg-[#4e7aff] text-white hover:bg-[#658CFF] border-zinc-400 border" >
-          Start an Interview 
-        </Button>
-              </Link>
+           
             </div>
           :<Button className="mt-6 flex items-center gap-2" onClick={HandleLoginDialog}>
           Get Started <ArrowRight className="w-4 h-4" />
@@ -52,51 +58,10 @@ export default function Home() {
         }
       </section>
 
-      {/* Your past interview sections */}
-      {
-        isLogged ?
-        <section className="py-20 px-6  grid grid-cols-3 gap-5">
-            {dummyInterviews.map((interview) => (
-              <InterviewCard {...interview} />
-          ))}
-        </section>:<></>
-      }
 
-      {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 px-6 bg-gray-100">
-        <h2 className="text-center text-3xl font-bold mb-12">How It Works</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <Card>
-            <CardHeader className="flex flex-col items-center">
-              <Rocket className="w-10 h-10 text-blue-500" />
-              <CardTitle>Step 1: Enter Your Info</CardTitle>
-            </CardHeader>
-            <CardContent>
-              Fill in your details and let AI handle the rest.
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-col items-center">
-              <Sparkles className="w-10 h-10 text-green-500" />
-              <CardTitle>Step 2: AI Generates</CardTitle>
-            </CardHeader>
-            <CardContent>
-              Watch AI craft a polished, job-winning resume for you.
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-col items-center">
-              <FileText className="w-10 h-10 text-purple-500" />
-              <CardTitle>Step 3: Download & Apply</CardTitle>
-            </CardHeader>
-            <CardContent>
-              Download your resume and start applying for your dream job.
-            </CardContent>
-          </Card>
-        </div>
-      {/* <SignUpDialog openDialog={openAuthDialog} setOpenDialog={setOpenAuthDialog}/> */}
+      {/* Features Section */}
+      <section id="features" className="py-20 px-6 bg-gray-100">
+       
       </section>
 
      
