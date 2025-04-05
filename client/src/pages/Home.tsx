@@ -40,7 +40,7 @@ export default function Home() {
           Create Resume 
         </Button>
             </Link>
-            <Link to={"/interview"}>
+            <Link to={"/interview/generate"}>
             <Button className="mt-6 p-6 flex items-center gap-2 bg-[#4e7aff] text-white hover:bg-[#658CFF] border-zinc-400 border" >
           Start an Interview 
         </Button>
