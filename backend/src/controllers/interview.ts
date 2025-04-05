@@ -185,6 +185,9 @@ const Get_Interview_Feedback = async (c: Context): Promise<any> => {
       where: {
         id: feedbackId,
       },
+      include: {
+        interview: true,
+      },
     });
 
     //  // If feedback does not exist, throw 404
