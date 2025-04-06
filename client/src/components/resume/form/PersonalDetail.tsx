@@ -76,7 +76,7 @@ const onSave= async(e:any)=>{
   
     
   return (
-    <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
+    <div className='p-5 shadow-lg rounded-lg border-t-accent-1 border-t-4 mt-10 bg-accent-2/60'>
     <h2 className='font-bold text-lg'>Personal Detail</h2>
     <p>Get Started with the basic information</p>
 
@@ -117,7 +117,7 @@ const onSave= async(e:any)=>{
             </div>
         </div>
         <div className='mt-3 flex justify-end'>
-            <Button type="submit"
+            <Button type="submit" className='bg-primary-1 hover:bg-primary-1'
             disabled={loading}>
                 {loading?<LoaderCircle className='animate-spin' />:'Save'}
                 </Button>

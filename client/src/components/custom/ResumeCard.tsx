@@ -1,53 +1,63 @@
-import React, { SetStateAction } from 'react'
+import React, { SetStateAction } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText } from "lucide-react";
-import { IResumeList } from '@/pages/Dashboard';
-import { Link } from 'react-router-dom';
-import DropDownResumeCard from './DropDownResumeCard';
-
+import { IResumeList } from "@/pages/resume/Dashboard";
+import { Link } from "react-router-dom";
+import DropDownResumeCard from "./DropDownResumeCard";
 
 const formatDate = (isoString: string) => {
-    return new Date(isoString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
+  return new Date(isoString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+};
 
-  
-const ResumeCard = ({resumeList,setResumeList}:{resumeList:IResumeList[],setResumeList:React.Dispatch<SetStateAction<IResumeList[]>>}) => {
+const ResumeCard = ({
+  resumeList,
+  setResumeList,
+}: {
+  resumeList: IResumeList[];
+  setResumeList: React.Dispatch<SetStateAction<IResumeList[]>>;
+}) => {
   return (
-      <div className='mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 '>
-          {
-        resumeList.length > 0 && resumeList.map((resume, index) => (
-          <motion.div
-          key={index}
+    <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {resumeList.map((resume, index) => (
+        <motion.div
+          key={resume.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className='relative'
-          >
-              <Link to={`/resume/${resume.id}/edit`}>
-              <Card>
-                <CardHeader className="flex flex-col items-center">
-                  <FileText className={`w-10 h-10 text-blue-500`} />
-                  <CardTitle>{resume.resumeTitle}</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center text-gray-600">
-                Last edited: {formatDate(resume.createdAt)}
-                </CardContent>
-              </Card>
-            </Link>
-            <DropDownResumeCard className="absolute top-2 right-1" setResumeList={setResumeList} resume={resume} index ={index} />
-          </motion.div>
-          
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          className="relative"
+        >
+          <Link to={`/resume/${resume.id}/edit`}>
+            <Card className="bg-accent-2 border border-gray-700 text-white rounded-3xl shadow-lg hover:shadow-[#777AF1]/30 transition duration-300 hover:scale-[1.02]">
+              <CardHeader className="flex flex-col items-center gap-2 pt-6">
+                <FileText className="w-10 h-10 text-[#777AF1]" />
+                <CardTitle className="text-lg font-semibold text-center">
+                  {resume.resumeTitle}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-sm text-gray-300 pb-6">
+                Last edited: <br />
+                <span className="text-gray-400">{formatDate(resume.createdAt)}</span>
+              </CardContent>
+            </Card>
+          </Link>
 
-        ))}
+          <DropDownResumeCard
+            className="absolute top-2 right-2"
+            setResumeList={setResumeList}
+            resume={resume}
+            index={index}
+          />
+        </motion.div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default ResumeCard
+export default ResumeCard;

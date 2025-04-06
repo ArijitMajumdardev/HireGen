@@ -122,7 +122,7 @@ const Skills = ({
   return (
     <form
       onSubmit={onSave}
-      className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10"
+      className="bg-accent-2/60 p-5 shadow-lg rounded-lg border-t-accent-1 border-t-4 mt-10"
     >
       <h2 className="font-bold text-lg">Skills</h2>
       <p>Add Your top professional key skills</p>
@@ -152,7 +152,7 @@ const Skills = ({
             type="button"
             variant="outline"
             onClick={AddNewSkills}
-            className="text-primary"
+            className="text-primary bg-primary-1"
           >
             {" "}
             + Add More Skill
@@ -161,13 +161,13 @@ const Skills = ({
             type="button"
             variant="outline"
             onClick={RemoveSkills}
-            className="text-primary"
+            className="text-primary bg-accent-1"
           >
             {" "}
             - Remove
           </Button>
         </div>
-        <Button type="submit" disabled={loading}>
+        <Button type="submit" disabled={loading} className="bg-primary-1 hover:bg-primary-1">
           {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
         </Button>
       </div>

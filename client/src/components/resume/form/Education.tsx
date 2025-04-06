@@ -106,7 +106,7 @@ const Education = ({
   };
 
   return (
-    <form className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10" onSubmit={onSave}>
+    <form className="p-5 shadow-lg rounded-lg border-t-accent-1 bg-accent-2/60 border-t-4 mt-10" onSubmit={onSave}>
       <h2 className="font-bold text-lg">Education</h2>
       <p>Add Your educational details</p>
 
@@ -181,7 +181,7 @@ const Education = ({
             type="button"
             variant="outline"
             onClick={AddNewEducation}
-            className="text-primary"
+            className="text-primary bg-primary-1"
           >
             {" "}
             + Add More Education
@@ -190,13 +190,13 @@ const Education = ({
             type="button"
             variant="outline"
             onClick={RemoveEducation}
-            className="text-primary"
+            className="text-primary bg-accent-1"
           >
             {" "}
             - Remove
           </Button>
         </div>
-        <Button disabled={loading} type="submit">
+        <Button disabled={loading} type="submit" className="bg-primary-1 hover:bg-primary-1">
           {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
         </Button>
       </div>

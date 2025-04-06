@@ -23,6 +23,10 @@
   margin-left: 20px;
 }
 
+body{
+  @apply bg-[#05021E] text-white font-poppins
+}
+
 /* ... */
 
 /* :root {

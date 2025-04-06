@@ -59,11 +59,11 @@ export const RichTextEditor = ({
       <div className="flex justify-between my-2">
         <label className="text-xs">Summery</label>
         <Button
-          variant="outline"
+          
           size="sm"
           onClick={GenerateSummeryFromAI}
           disabled={loading}
-          className="flex gap-2 border-primary text-primary"
+          className="flex gap-2 border border-accent-1 text-white"
         >
           {loading ? (
             <LoaderCircle className="animate-spin" />
@@ -74,7 +74,7 @@ export const RichTextEditor = ({
           )}
         </Button>
       </div>
-      <EditorProvider>
+      <EditorProvider >
         <Editor
           value={value}
           onChange={(e) => {

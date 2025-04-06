@@ -37,61 +37,52 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full px-6 py-4 bg-white shadow-md flex justify-between items-center">
+    <nav className="sticky top-6 z-50 bg-[#272533]/60 backdrop-blur-md  rounded-full px-8 py-3 flex items-center justify-between max-w-5xl mx-auto mt-6 shadow-md">
       <Link to={"/"}>
-        <h1 className="text-2xl font-bold text-gray-900">ResumeGen</h1>
+        <h1 className="text-2xl font-bold bg-gradient-to-r from-[#F0A7C3] to-[#777AF1] bg-clip-text text-transparent">HireGen</h1>
       </Link>
 
-      <div className="hidden md:flex gap-6 text-gray-700  md:w-full justify-center md:gap-4 ">
+      <div className="hidden md:flex gap-10 text-white text-base font-normal  md:w-full justify-center md:gap-10 ">
         <button
           onClick={() => handleNavigation("features")}
-          className="hover:text-gray-900"
+          className="hover:text-[#777AF1] transition-colors"
         >
           Features
         </button>
+        <Link to={'/interview/dashboard'} >
         <button
-          onClick={() => handleNavigation("how-it-works")}
-          className="hover:text-gray-900"
-        >
-          How It Works
+          className="hover:text-[#777AF1] transition-colors"
+          >
+          Interview
         </button>
+        </Link>
+        <Link to={'/dashboard'}>
         <button
-          onClick={() => handleNavigation("contact")}
-          className="hover:text-gray-900"
-        >
-          Contact
+          className="hover:text-[#777AF1] transition-colors"
+          >
+          Resume
         </button>
+          </Link>
       </div>
 
       {isLogged ? (
         <div
-          className={` md:flex gap-2 hidden }  ${
-            location.pathname !== "/dashboard" ? "w-72 " : ""
-          } `}
+          className="hidden md:block"
         >
-          {location.pathname !== "/dashboard" ? (
-            <Link to={"/dashboard"}>
-              <Button className="bg-gray-900 text-white w-full">
-                dashboard
-              </Button>
-            </Link>
-          ) : (
-            <></>
-          )}
           <Button
-            className="bg-gray-900 text-white w-28"
+            className="bg-[#777AF1] text-white hover:bg-[#9092f8] px-5 rounded-full"
             onClick={handleLogout}
           >
             Logout
           </Button>
         </div>
       ) : (
-        <div>
+        <div  className="hidden md:block">
           <Button
-            className="bg-gray-900 text-white w-36 hidden md:block "
+            className="bg-[#777AF1] text-white text-base font-normal hover:bg-[#9092f8] px-4 py-2 rounded-full"
             onClick={HandleLoginDialog}
           >
-            Get Started
+            Signup
           </Button>
         </div>
       )}
@@ -110,6 +101,6 @@ export default function Header() {
         openDialog={openAuthDialog}
         setOpenDialog={setOpenAuthDialog}
       />
-    </header>
+    </nav>
   );
 }

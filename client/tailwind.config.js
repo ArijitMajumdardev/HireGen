@@ -4,6 +4,9 @@ export default {
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
 	  extend: {
+		fontFamily: {
+			poppins: ['Poppins', 'sans-serif'],
+		  },
 		backgroundImage: {
 			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 		  },
@@ -12,7 +15,12 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-  		colors: {
+		  colors: {
+			"primary-1": "#777AF1",
+			"secondary-1": "#800F90",
+			"base-1": "#05021E",
+			"accent-1": "#F0A7C3",
+			"accent-2": "#272533",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -56,6 +64,16 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [function ({ addUtilities }) {
+    addUtilities({
+      ".no-scrollbar": {
+        "-ms-overflow-style": "none", // IE
+        "scrollbar-width": "none", // Firefox
+      },
+      ".no-scrollbar::-webkit-scrollbar": {
+        display: "none", // Chrome
+      },
+    });
+  },require("tailwindcss-animate")],
 }
 

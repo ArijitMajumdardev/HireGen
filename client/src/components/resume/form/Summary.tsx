@@ -73,15 +73,15 @@ const Summary = ({ enabledNext }: { enabledNext: React.Dispatch<boolean> }) => {
 
   return (
     <div>
-    <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
+    <div className='p-5 shadow-lg rounded-lg border-t-accent-1 border-t-4 mt-10 bg-accent-2/60'>
    <h2 className='font-bold text-lg'>Summery</h2>
    <p>Add Summery for your job title</p>
 
    <form className='mt-7' onSubmit={onSave}>
        <div className='flex justify-between items-end'>
            <label>Add Summery</label>
-           <Button variant="outline" 
-           type="button" size="sm" className="border-primary text-primary flex gap-2" onClick={()=>GenerateSummeryFromAI()}> 
+           <Button  
+           type="button" size="sm" className="border border-accent-1 bottom-2  text-white  flex gap-2" onClick={()=>GenerateSummeryFromAI()}> 
            <Brain className='h-4 w-4' />  Generate from AI</Button>
        </div>
        <Textarea className="mt-5 h-[20vh] resize-none " required
@@ -91,7 +91,7 @@ const Summary = ({ enabledNext }: { enabledNext: React.Dispatch<boolean> }) => {
        />
        <div className='mt-2 flex justify-end'>
        <Button type="submit"
-           disabled={loading}>
+           disabled={loading} className='bg-primary-1 hover:bg-primary-1'>
                {loading?<LoaderCircle className='animate-spin' />:'Save'}
                </Button>
        </div>
@@ -106,9 +106,9 @@ const Summary = ({ enabledNext }: { enabledNext: React.Dispatch<boolean> }) => {
            onClick={() => {
              setResumeInfo((prev: IResumeInfo | undefined) => { return { ...prev, summary: item?.summary } as IResumeInfo })
            }}
-           className='p-5 shadow-lg my-4 rounded-lg cursor-pointer'>
-               <h2 className='font-bold my-1 text-primary'>Level: {item?.experience_level}</h2>
-               <p>{item?.summary}</p>
+           className='p-5 shadow-lg my-4 rounded-lg cursor-pointer bg-accent-2/70'>
+               <h2 className='font-bold my-1 text-white'>Level: {item?.experience_level}</h2>
+               <p className='text-gray-300'>{item?.summary}</p>
            </div>
        ))}
    </div>}

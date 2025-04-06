@@ -17,22 +17,22 @@ const ResumeForm = ({resumeId}:{resumeId:string}) => {
   
 
   return (
-    <div>
-      <div className='flex justify-between'>
+    <div >
+      <div className='flex justify-end '>
             {/* <Link to={"/dashboard"}>
           </Link> */}
-        <Button variant={'ghost'}>
+        {/* <Button variant={'ghost'}>
           <LayoutGrid/>
           Themes
-          </Button>
+          </Button> */}
          
           <div className='flex gap-2'>
             {activeFormIndex>1
-            &&<Button size="sm" 
+            &&<Button size="sm" className='bg-primary-1'
             onClick={()=>setActiveFormIndex(activeFormIndex-1)}> <ArrowLeft/> </Button> }
             <Button 
             disabled={!enableNext}
-            className="flex gap-2" size="sm"
+            className="flex gap-2 bg-primary-1" size="sm"
             onClick={()=>setActiveFormIndex(activeFormIndex+1)}
             > Next 
             <ArrowRight/> </Button>

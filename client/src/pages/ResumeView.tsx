@@ -34,7 +34,7 @@ const ResumeView = () => {
             resume url{" "}
           </p>
           <div className="flex justify-between px-44 my-10">
-            <Button>
+            <Button className="bg-primary-1 hover:bg-[#9092f8]">
               <PDFDownloadLink
                 document={<ResumePDF resumeInfo={resumeInfo} />}
                 fileName={resumeInfo?.resumeTitle + "_Resume"}
@@ -58,7 +58,7 @@ const ResumeView = () => {
               }}
               onClick={() => console.log("shared successfully!")}
             >
-              <Button>Share</Button>
+              <Button className="bg-accent-1 text-black hover:bg-accent-1">Share</Button>
             </RWebShare>
           </div>
         </div>

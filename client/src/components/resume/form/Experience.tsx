@@ -128,7 +128,7 @@ const Experience = ({
   return (
     <div>
       <form
-        className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10"
+        className="p-5 shadow-lg rounded-lg border-t-accent-1 border-t-4 mt-10 bg-accent-2/60"
         onSubmit={onSave}
       >
         <h2 className="font-bold text-lg">Professional Experience</h2>
@@ -210,7 +210,7 @@ const Experience = ({
             <Button
               variant="outline"
               onClick={AddNewExperience}
-              className="text-primary"
+              className="text-primary bg-primary-1"
               type="button"
             >
               {" "}
@@ -219,14 +219,14 @@ const Experience = ({
             <Button
               variant="outline"
               onClick={RemoveExperience}
-              className="text-primary"
+              className="text-primary bg-accent-1"
               type="button"
             >
               {" "}
               - Remove
             </Button>
           </div>
-          <Button disabled={loading} type="submit">
+          <Button disabled={loading} type="submit" className="bg-primary-1 hover:bg-primary-1">
             {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
           </Button>
         </div>

@@ -9,7 +9,7 @@ const ResumePreview = () => {
   const { resumeInfo } = useResumeInfo()
 
   return (
-    <div className='shadow-lg h-full p-14 border-t-[20px]'
+    <div className='shadow-lg h-full p-14 border-t-[20px] bg-white text-black'
     style={{
         borderColor:resumeInfo?.themeColor
     }}>

@@ -45,25 +45,42 @@ const CreateResumeDialog = ({ openDialog, setOpenDialog }: { openDialog: boolean
         setOpenDialog(false)
     }
   return (
-      <>
-          <Dialog open={openDialog} onOpenChange={closeResumeDialog}>
-  {/* <DialogTrigger>Open</DialogTrigger> */}
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Create New Resume </DialogTitle>
-      <DialogDescription>
-        Add a title to your new resume
-        <Input className="my-2" placeholder="Ex. Fullstack Resume" onChange={(e)=>setResumeTitle(e.target.value)} />   
-      </DialogDescription>
-        <div className="flex justify-end gap-2">
-        <Button variant={"ghost"}  onClick={closeResumeDialog}>Cancel</Button>                  
-        <Button disabled={!resumeTitle} onClick={HandleCreateResume}>Create</Button>                  
-        </div>
-    </DialogHeader>
-  </DialogContent>
-</Dialog>
+    <Dialog open={openDialog} onOpenChange={closeResumeDialog}>
+    <DialogContent className="bg-[#262433] border border-gray-700 text-white rounded-2xl shadow-xl">
+      <DialogHeader>
+        <DialogTitle className="text-xl text-white font-bold">
+          Create New Resume
+        </DialogTitle>
+        <DialogDescription className="text-sm text-gray-300 mt-1">
+          Add a title to your new resume
+        </DialogDescription>
+      </DialogHeader>
 
-    </>
+      <Input
+        className="mt-4 bg-[#1F1D2B] border border-gray-600 text-white placeholder:text-gray-400 focus:ring-2 focus:ring-[#777AF1]"
+        placeholder="e.g., Fullstack Resume"
+        value={resumeTitle}
+        onChange={(e) => setResumeTitle(e.target.value)}
+      />
+
+      <div className="flex justify-end gap-2 mt-6">
+        <Button
+          // variant={"ghost"}
+          onClick={closeResumeDialog}
+          className="text-gray-300  hover:text-white"
+        >
+          Cancel
+        </Button>
+        <Button
+          disabled={!resumeTitle}
+          onClick={HandleCreateResume}
+          className="bg-[#777AF1] text-white hover:bg-[#6c6fe1]"
+        >
+          Create
+        </Button>
+      </div>
+    </DialogContent>
+  </Dialog>
   )
 }
 
