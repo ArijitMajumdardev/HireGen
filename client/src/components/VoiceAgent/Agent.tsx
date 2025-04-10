@@ -196,9 +196,9 @@ const Agent = ({
       </div>
       {messages.length > 0 && (
         <div className="rounded-2xl w-full ">
-          <div className="bg-base-1 border-2 border-accent-2 rounded-2xl  min-h-12 px-5 py-3 flex items-center justify-center">
+          <div className="bg-base-1 border-2 border-accent-2 rounded-2xl  min-h-14 px-5 py-3 flex items-center justify-center">
             <p
-              className={cn(
+              className={cn("text-lg text-center text-white",
                 "transition-opacity duration-500 opacity-0",
                 "animate-fadeIn opacity-100"
               )}
