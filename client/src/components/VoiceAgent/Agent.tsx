@@ -6,6 +6,7 @@ import { data, useNavigate } from "react-router-dom";
 import { interviewer } from "@/constants/DummyData";
 import API from "@/lib/ServerAPI";
 import toast from "react-hot-toast";
+import { Bot, CircleUser } from "lucide-react";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -164,36 +165,38 @@ const Agent = ({
   return (
     <>
       <div className="call-view">
-        <div className="card-interviewer">
-          <div className="avatar">
-            <img
+        <div className={cn('card-interviewer bg-base-1',callStatus == CallStatus.ACTIVE && isSpeaking ? 'border border-accent-1/40':'')}>
+          <div className="avatar size-16">
+            {/* <img
               src="/ai-avatar.png"
               alt="profile-image"
-              width={65}
-              height={54}
+              width={40}
+              height={40}
               className="object-cover"
-            />
-            {isSpeaking && <span className="animate-speak animate-ping" />}
+            /> */}
+            <Bot strokeWidth={1} className="fill-accent-2 size-16" />
+            {isSpeaking && <span className="animate-speak animate-ping " />}
           </div>
           <h3>AI Interviewer</h3>
         </div>
         {/* User Profile Card */}
-        <div className="card-border">
-          <div className="card-content">
-            <img
+        <div className={cn('card-border ',callStatus == CallStatus.ACTIVE && !isSpeaking ? 'border border-accent-1/40':'')}>
+          <div className="card-content bg-base-1">
+            {/* <img
               src="/user-avatar.png"
               alt="profile-image"
               width={539}
               height={539}
               className="rounded-full object-cover size-[120px]"
-            />
+            /> */}
+            <CircleUser strokeWidth={1} className="fill-accent-2 size-16" />
             <h3>{userName}</h3>
           </div>
         </div>
       </div>
       {messages.length > 0 && (
-        <div className="transcript-border">
-          <div className="transcript">
+        <div className="rounded-2xl w-full ">
+          <div className="bg-base-1 border-2 border-accent-2 rounded-2xl  min-h-12 px-5 py-3 flex items-center justify-center">
             <p
               className={cn(
                 "transition-opacity duration-500 opacity-0",
@@ -208,7 +211,7 @@ const Agent = ({
       <div className="w-full flex justify-center">
         {callStatus !== CallStatus.ACTIVE ? (
           <button
-            className="relative flex justify-center items-center btn-call "
+            className="relative flex justify-center items-center btn-call mt-4 "
             onClick={() => handleCall()}
           >
             <span
