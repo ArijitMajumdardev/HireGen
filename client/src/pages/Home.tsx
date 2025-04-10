@@ -96,20 +96,20 @@ export default function Home() {
               <div className="w-1/3 h-[300px] flex items-center justify-center  ">
                 <img src="/icons/mock_interview.png" alt="AI Bot Icon" className="rounded-l-[4rem] w-full h-full object-cover"/>
               </div>
-              <div className="bg-[#777AF1] p-6  text-white font-semibold w-2/3 h-[300px] rounded-r-[4rem] ">
+              <div className="bg-[#777AF1] p-6  text-white font-semibold w-2/3 h-[300px] rounded-r-[4rem]  overflow-clip">
                 <h2 className="text-black font-bold text-lg ">
           Mock Interviews with AI <br /> Voice Agents
                 </h2>
-                <p className="mt-4 font-normal text-[15px]">
+                <p className="mt-4 font-normal text-[15px] ">
                 Simulate real-world interview scenarios with lifelike AI voice agents. Practice answering job-specific questions, get instant feedback, and build confidence before your next big interview.
                 </p>
         </div>
       </div>
 
       {/* Bottom Left Card */}
-            <div className="bg-[#262433] p-6 rounded-[5rem] flex items-center justify-start h-[280px] w-[580px] ml-auto  ">
+            <div className="bg-[#262433] p-6 rounded-[5rem] flex md:flex-row items-center justify-start md:h-[280px] md:w-[580px] ml-auto flex-col-reverse h-[540px] ">
           
-        <div className="bg-[#777AF1] p-6 rounded-l-[4rem] text-white font-semibold w-3/5 h-[250px] ">
+        <div className="bg-[#777AF1] p-6 md:rounded-none md:rounded-l-[4rem] text-white font-semibold md:w-3/5 md:h-[250px] h-2/4 rounded-b-[4rem] overflow-clip ">
                 <h2 className="text-black font-bold text-lg">
                 AI-Powered <br /> Resume Analysis
                 </h2>
@@ -117,18 +117,18 @@ export default function Home() {
                 Get detailed AI-driven feedback on your resume. Discover readability scores, and actionable tips to improve your chances of passing ATS systems and impressing recruiters.
                 </p>
               </div>
-              <div className="w-1/3 h-[250px] flex items-center justify-center ">
-                <img src="/icons/resume_analysis.png" alt="AI Bot Icon" className="rounded-r-[4rem] w-full h-full object-cover"/>
+              <div className="md:w-2/5 md:h-[250px] flex items-center justify-center h-2/4 w-full  ">
+                <img src="/icons/resume_analysis.png" alt="AI Bot Icon" className="md:rounded-r-[4rem] rounded-t-[4rem] md:rounded-none w-full h-full object-cover"/>
               </div>
       </div>
     </div>
 
     {/* Right Tall Card */}
-          <div className="bg-[#262433] p-6 rounded-[5rem] flex flex-col items-center justify-center h-[540px] ">
+          <div className="bg-[#262433] p-6 rounded-[5rem] flex flex-col items-center  justify-center h-[540px] ">
           <div className="h-2/4 w-full flex items-center justify-center">
                 <img src="/icons/resume_builder.png" alt="AI Bot Icon" className="rounded-t-[4rem] w-full h-full object-cover"/>
               </div>
-            <div className="bg-[#F0A7C3]/70  p-5 rounded-b-[4rem] text-white font-semibold w-full text-center h-2/4">
+            <div className="bg-[#F0A7C3]/70  p-5 rounded-b-[4rem] text-white font-semibold w-full text-center h-2/4 overflow-clip">
               <h2 className=" font-bold text-lg text-black">
                 Professional Resume <br /> Builder Backed by AI
               </h2>
