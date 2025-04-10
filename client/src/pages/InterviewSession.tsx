@@ -40,7 +40,7 @@ const InterviewSession = () => {
 
   return (
     <>
-    <div className="flex flex-row gap-4 justify-between">
+    <div className="flex flex-col items-center gap-2 mt-3">
       <div className="flex flex-row gap-4 items-center max-sm:flex-col">
         <div className="flex flex-row gap-4 items-center">
           <img
@@ -50,24 +50,26 @@ const InterviewSession = () => {
             height={40}
             className="rounded-full object-cover size-[40px]"
           />
-          <h3 className="capitalize">{interview?.role} Interview</h3>
+          <h3 className="capitalize text-xl font-bold">{interview?.role} Interview</h3>
         </div>
 
         <DisplayTechIcons techStack={interview?.techstack!} />
       </div>
 
-      <p className="bg-gray-400 px-4 py-2 rounded-lg h-fit">
+      <p className="text-gray-400">
         {interview?.type}
       </p>
     </div>
 
+    <div className="max-w-5xl mx-auto bg-[#272533]/60 rounded-2xl shadow-md p-8">
     <Agent
       userName={user?.name!}
       userId={user?.id!}
       interviewId={interviewId!}
       type="interview"
       questions={interview?.questions!}
-    />
+        />
+        </div>
   </>
   )
 }
