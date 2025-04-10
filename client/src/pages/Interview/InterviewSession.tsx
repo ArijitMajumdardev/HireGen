@@ -61,7 +61,7 @@ const InterviewSession = () => {
       </p>
     </div>
 
-    <div className="max-w-5xl mx-auto bg-[#272533]/60 rounded-2xl shadow-md p-8">
+    <div className="max-w-5xl mx-auto bg-[#272533] rounded-2xl shadow-md p-8">
     <Agent
       userName={user?.name!}
       userId={user?.id!}
