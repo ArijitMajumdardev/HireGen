@@ -9,12 +9,12 @@ import { useAuthContext } from "./context/AuthProvider";
 import { useEffect } from "react";
 
 import API from "./lib/ServerAPI";
-import ResumeEdit from "./pages/ResumeEdit";
-import ResumeView from "./pages/ResumeView";
-import SharedResumePage from "./pages/SharedResumePage";
-import InterviewDashboard from "./pages/InterviewDashboard";
-import InterviewGeneration from "./pages/InterviewGeneration";
-import InterviewSession from "./pages/InterviewSession";
+import ResumeEdit from "./pages/resume/ResumeEdit";
+import ResumeView from "./pages/resume/ResumeView";
+import SharedResumePage from "./pages/resume/SharedResumePage";
+import InterviewDashboard from "./pages/Interview/InterviewDashboard";
+import InterviewGeneration from "./pages/Interview/InterviewGeneration";
+import InterviewSession from "./pages/Interview/InterviewSession";
 import InterviewFeedback from "./pages/Interview/Feedback";
 function App() {
   const { setIsLogged, setUser } = useAuthContext();
