@@ -52,13 +52,13 @@ export default function Dashboard() {
 
   return (
     <motion.div
-      className="min-h-screen py-12 px-6 bg-[#050020] text-white"
+      className="min-h-screen py-12 px-6 bg-[#050020] text-white md:w-full"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <motion.h1
-        className="text-4xl md:text-2xl font-semibold mb-14 "
+        className="text-2xl font-semibold mb-14 text-center "
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -66,7 +66,7 @@ export default function Dashboard() {
         Your Resume Workspace
       </motion.h1>
 
-      <div className="w-64">
+      <div className="md:w-64 w-full ">
         {/* Create Resume Card */}
         <motion.div
           whileHover={{ scale: 1.05 }}
