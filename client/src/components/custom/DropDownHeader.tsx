@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const DropDownHeader = ({
   className,
@@ -21,56 +21,54 @@ const DropDownHeader = ({
   handleLogout: () => void;
   HandleLoginDialog: () => void;
 }) => {
+  const location = useLocation();
+
+  const navItemStyle =
+    "hover:bg-[#2A273C] text-white px-3 py-2 rounded-md transition w-full text-center";
+
+  const actionItemStyle =
+    "bg-[#35324D] text-white font-medium hover:bg-[#44406B] transition px-3 py-2 rounded-md w-full text-center";
+
   return (
     <div className={cn(className)}>
       <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Menu className="w-6 h-6" />
+        <DropdownMenuTrigger className="focus:outline-none">
+          <Menu className="w-6 h-6 text-white" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem
-            onClick={() => handleNavigation("features")}
-            className="hover:text-gray-900 "
-          >
-            <span className="text-center w-full">Features</span>
+
+        <DropdownMenuContent
+          className="bg-accent-2/80 backdrop-blur-md border border-[#2E2B3F] shadow-lg p-2 rounded-lg space-y-1 mt-2 min-w-[160px]"
+          align="end"
+        >
+          <DropdownMenuItem onClick={() => handleNavigation("features")}>
+            <span className={navItemStyle}>Features</span>
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => handleNavigation("how-it-works")}
-            className="hover:text-gray-900"
-          >
-            <span className="text-center w-full">How It Works</span>
+
+          <DropdownMenuItem onClick={() => handleNavigation("how-it-works")}>
+            <span className={navItemStyle}>How It Works</span>
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => handleNavigation("contact")}
-            className="hover:text-gray-900"
-          >
-             <span className="text-center w-full">Contact</span>
+
+          <DropdownMenuItem onClick={() => handleNavigation("contact")}>
+            <span className={navItemStyle}>Contact</span>
           </DropdownMenuItem>
 
           {isLogged ? (
             <>
-              <DropdownMenuItem
-                className="bg-gray-900 text-white w-full mb-2"
-                onClick={handleLogout}
-              >
-                 <span className="text-center w-full">Logout</span>
+              <DropdownMenuItem onClick={handleLogout}>
+                <span className={actionItemStyle}>Logout</span>
               </DropdownMenuItem>
-              {location.pathname !== "/dashboard" ? (
-                <Link to={"/dashboard"}>
-                  <DropdownMenuItem className="bg-gray-900 text-white w-full">
-                  <span className="text-center w-full">Dashboard</span>
+
+              {location.pathname !== "/dashboard" && (
+                <Link to="/dashboard">
+                  <DropdownMenuItem>
+                    <span className={actionItemStyle}>Dashboard</span>
                   </DropdownMenuItem>
                 </Link>
-              ) : (
-                <></>
               )}
             </>
           ) : (
-            <DropdownMenuItem
-              className="bg-gray-900 text-white w-full"
-              onClick={HandleLoginDialog}
-            >
-               <span className="text-center w-full">Get started</span>
+            <DropdownMenuItem onClick={HandleLoginDialog}>
+              <span className={actionItemStyle}>Get Started</span>
             </DropdownMenuItem>
           )}
         </DropdownMenuContent>
