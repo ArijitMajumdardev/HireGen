@@ -7,6 +7,7 @@ import {
 import { cors } from "hono/cors";
 import { handle_Auth_Middleware } from "./middlewares/authMiddleware";
 import {
+  analyseResume,
   deleteResume,
   deleteSkill,
   Get_Resume,
@@ -34,6 +35,7 @@ const app = new Hono<{
     JWT_SECRET: string;
     CORS_ORIGIN: string;
     GOOGLE_GENERATIVE_AI_API_KEY: string;
+    OCR_API_KEY: string
   };
   Variables: {
     userId: string;
@@ -72,6 +74,7 @@ app.put("/update-education", handle_Auth_Middleware, updateEducation);
 app.put("/update-skills", handle_Auth_Middleware, updateSkills);
 app.delete("/delete-skills", handle_Auth_Middleware, deleteSkill);
 app.delete("/delete-resume/:resumeId", handle_Auth_Middleware, deleteResume);
+app.post("/analyse-resume",handle_Auth_Middleware, analyseResume);
 
 app.post("/vapi/generate", handle_Auth_Middleware, handle_interview_generate);
 app.get("/get-user-interviews/:userid",handle_Auth_Middleware,Get_User_Interviews);
