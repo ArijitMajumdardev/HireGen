@@ -16,6 +16,7 @@ import InterviewDashboard from "./pages/Interview/InterviewDashboard";
 import InterviewGeneration from "./pages/Interview/InterviewGeneration";
 import InterviewSession from "./pages/Interview/InterviewSession";
 import InterviewFeedback from "./pages/Interview/Feedback";
+import ResumeAnalysis from "./pages/resume/ResumeAnalysis";
 function App() {
   const { setIsLogged, setUser } = useAuthContext();
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/resume/:id/edit" element={<ResumeEdit />} />
           <Route path="/my-resume/:id/view" element={<ResumeView />} />
           <Route path="/share/:id/view" element={<SharedResumePage />} />
+          <Route path="/resume-analysis" element={<ResumeAnalysis />} />
           <Route path="/interview/generate" element={<InterviewGeneration />} />
           <Route path="/interview/dashboard" element={<InterviewDashboard />} />
           <Route path="/interview/:id" element={<InterviewSession />} />
