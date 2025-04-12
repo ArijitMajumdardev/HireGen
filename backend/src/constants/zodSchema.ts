@@ -33,3 +33,11 @@ export const feedbackSchema = z.object({
   areasForImprovement: z.array(z.string()),
   finalAssessment: z.string(),
 });
+
+
+export const resumeAnalysisSchema = z.object({
+  match: z.number(),
+  matchingSkills: z.array(z.string()),
+  weakAreas: z.array(z.string()),
+  improvements: z.array(z.string())
+})
