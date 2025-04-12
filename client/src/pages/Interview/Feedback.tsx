@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom";
 const InterviewFeedback = () => {
   const param = useParams();
   const interviewId = param.interviewId;
-  const feedbackId = param.feedbackId;
   const { user } = useAuthContext();
   const [feedback, setFeedback] = useState<Feedback>()
   const [interview, setInterview] = useState<Interview>()
@@ -21,7 +20,7 @@ const InterviewFeedback = () => {
     if (!user?.id) return;
     const getFeedback = async () => {
       try {
-        const response = await API.get(`/interview/feedback?feedbackId=${feedbackId}&userId=${user.id}`, {
+        const response = await API.get(`/interview/feedback?interviewId=${interviewId}&userId=${user.id}`, {
           headers: {
             "Content-Type": "application/json",
           },
