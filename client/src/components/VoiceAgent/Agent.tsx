@@ -101,7 +101,7 @@ const Agent = ({
       const { success, feedbackId }: { success: boolean; feedbackId: string } = response.data;
 
       if (success && feedbackId) {
-        navigate(`/interview/${interviewId}/feedback/${feedbackId}`);
+        navigate(`/interview/${interviewId}/feedback`);
       } else {
         
         console.error("Error saving feedback: No feedbackId returned");

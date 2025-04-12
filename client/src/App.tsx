@@ -57,7 +57,7 @@ function App() {
           <Route path="/interview/dashboard" element={<InterviewDashboard />} />
           <Route path="/interview/:id" element={<InterviewSession />} />
           <Route
-            path="/interview/:interviewId/feedback/:feedbackId"
+            path="/interview/:interviewId/feedback/"
             element={<InterviewFeedback />}
           />
         </Routes>
