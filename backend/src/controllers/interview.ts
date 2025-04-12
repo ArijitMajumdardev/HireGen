@@ -3,7 +3,7 @@ import { getPrisma } from "../../prisma/PrismaClient";
 import { HTTPException } from "hono/http-exception";
 import { generateObject, generateText } from "ai";
 import { createGoogleGenerativeAI, google } from "@ai-sdk/google";
-import { feedbackSchema } from "../constants/feedback";
+import { feedbackSchema } from "../constants/zodSchema";
 
 const handle_interview_generate = async (c: Context): Promise<any> => {
   try {
