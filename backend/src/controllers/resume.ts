@@ -2,6 +2,19 @@ import { Context } from "hono";
 import { getPrisma } from "../../prisma/PrismaClient";
 import { HTTPException } from "hono/http-exception";
 import defaultData from "../defaultData";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import mammoth from "mammoth";
+import { generateObject } from "ai";
+import { resumeAnalysisSchema } from "../constants/zodSchema";
+
+type OCRResponse = {
+  ParsedResults?: {
+    ParsedText: string;
+  }[];
+  IsErroredOnProcessing: boolean;
+  ErrorMessage?: string | string[];
+  ErrorDetails?: string;
+};
 
 const handleCreateResume = async (c: Context): Promise<any> => {
   try {
@@ -321,6 +334,95 @@ const deleteResume = async (c: Context): Promise<any> => {
   }
 };
 
+const analyseResume = async (c: Context): Promise<any> => {
+  try {
+    const google = createGoogleGenerativeAI({
+      apiKey: c.env.GOOGLE_GENERATIVE_AI_API_KEY,
+    });
+    const formData = await c.req.formData();
+    const file = formData.get("resume") as File;
+    const jobDescription = formData.get("jobDescription") as string;
+    if (!file || !jobDescription) {
+      throw new HTTPException(400, {
+        message: "Missing resume or job description",
+      });
+    }
+
+    const buffer = await file.arrayBuffer();
+    const buffer2 = Buffer.from(await file.arrayBuffer());
+    let resumeText = "";
+
+    if (file.name.endsWith(".pdf")) {
+      const base64PDF = Buffer.from(buffer).toString("base64");
+
+      const ocrForm = new FormData();
+      ocrForm.append("base64Image", `data:application/pdf;base64,${base64PDF}`);
+      ocrForm.append("OCREngine", "2");
+      ocrForm.append("isOverlayRequired", "false");
+      ocrForm.append("language", "eng");
+      ocrForm.append("apikey", c.env.OCR_API_KEY);
+
+      const response = await fetch("https://api.ocr.space/parse/image", {
+        method: "POST",
+        body: ocrForm,
+      });
+
+      const data = (await response.json()) as OCRResponse;
+      console.log(data);
+      if (!data?.ParsedResults?.[0]?.ParsedText) {
+        throw new HTTPException(400, {
+          message: "OCR failed to extract text from PDF",
+        });
+      }
+      resumeText = data.ParsedResults[0].ParsedText;
+    } else if (file.name.endsWith(".docx")) {
+      const result = await mammoth.extractRawText({ buffer: buffer2 });
+      resumeText = result.value;
+    } else {
+      throw new HTTPException(400, { message: "Unsupported file type" });
+    }
+
+    const prompt = `
+You are a professional resume Analyzer.Your task is to evaluate the resume match with the job description based on structured categories.
+
+Compare the following RESUME and JOB DESCRIPTION, then:
+1. Give a match score (0-100)
+2. List matching skills
+3. List missing or weak areas
+4. Suggest improvements
+Do not add categories other than the ones provided.
+
+RESUME:
+${resumeText}
+
+JOB DESCRIPTION:
+${jobDescription}
+`;
+
+    const { object } = await generateObject({
+      model: google("gemini-2.0-flash-001", {
+        structuredOutputs: false,
+      }),
+      schema: resumeAnalysisSchema,
+      prompt: prompt,
+      system:
+        "You are a professional resume Analyzer.Your task is to evaluate the resume match with the job description based on structured categories",
+    });
+
+    const analysis = {
+      match: object.match,
+      matchingSkills: object.matchingSkills,
+      weakAreas: object.weakAreas,
+      improvements: object.improvements,
+    };
+    c.status(200);
+    return c.json({ success: true, analysis: analysis });
+  } catch (error) {
+    c.status(400);
+    throw new HTTPException(400, { message: "Error generating Analysis" });
+  }
+};
+
 export {
   handleCreateResume,
   GetResumeList,
@@ -332,4 +434,5 @@ export {
   deleteSkill,
   Get_Shared_Resume,
   deleteResume,
+  analyseResume,
 };
