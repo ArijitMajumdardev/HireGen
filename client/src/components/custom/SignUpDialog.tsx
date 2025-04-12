@@ -112,7 +112,7 @@ const SignUpDialog = ({
           <Button
             variant="ghost"
             onClick={closeDialog}
-            className="text-gray-400 hover:text-white hover:text-gray-600"
+            className="text-gray-400  hover:text-gray-600"
           >
             Cancel
           </Button>

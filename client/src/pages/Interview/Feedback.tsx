@@ -2,8 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useAuthContext } from "@/context/AuthProvider";
 import API from "@/lib/ServerAPI";
 import dayjs from "dayjs";
-import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 

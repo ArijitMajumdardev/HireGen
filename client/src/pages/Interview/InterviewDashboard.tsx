@@ -1,7 +1,7 @@
 import InterviewCard from "@/components/custom/InterviewCard";
 import { useAuthContext } from "@/context/AuthProvider";
 import API from "@/lib/ServerAPI";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";

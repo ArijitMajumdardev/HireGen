@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
-import { cn, getRandomInterviewCover } from "@/lib/utils";
+import { getRandomInterviewCover } from "@/lib/utils";
 import DisplayTechIcons from "./DisplayTechIcons";
 import { CalendarDays, Star } from "lucide-react";
 

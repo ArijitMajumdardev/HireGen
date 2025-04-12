@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
-import { data, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { interviewer } from "@/constants/DummyData";
 import API from "@/lib/ServerAPI";
 import toast from "react-hot-toast";

@@ -3,7 +3,7 @@ import Agent from '@/components/VoiceAgent/Agent'
 import { useAuthContext } from '@/context/AuthProvider'
 import API from '@/lib/ServerAPI'
 import { getRandomInterviewCover } from '@/lib/utils'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useParams } from 'react-router-dom'
 

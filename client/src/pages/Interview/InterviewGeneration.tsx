@@ -1,6 +1,5 @@
 import Agent from '@/components/VoiceAgent/Agent';
 import { useAuthContext } from '@/context/AuthProvider';
-import React from 'react';
 
 const InterviewGeneration = () => {
   const { user } = useAuthContext();

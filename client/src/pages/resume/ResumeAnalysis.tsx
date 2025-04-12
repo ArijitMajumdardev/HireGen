@@ -1,7 +1,6 @@
 import API from "@/lib/ServerAPI";
 import React, { useRef, useState } from "react";
-import { CheckCircle, XCircle, Lightbulb, Circle, LoaderCircle } from "lucide-react"; // At the top of the file
-import { cn } from "@/lib/utils";
+import { CheckCircle, XCircle, Lightbulb, LoaderCircle } from "lucide-react"; // At the top of the file
 import toast from "react-hot-toast";
 
 const ResumeAnalysis = () => {
