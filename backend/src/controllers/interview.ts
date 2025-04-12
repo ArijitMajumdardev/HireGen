@@ -173,17 +173,17 @@ const Handle_Interview_Feedback = async (c: Context): Promise<any> => {
 //Get Interview Feedback
 
 const Get_Interview_Feedback = async (c: Context): Promise<any> => {
-  console.log("aaaaaaaa");
   try {
     const prisma = getPrisma(c.env.DATABASE_URL);
-    const feedbackId = c.req.query("feedbackId");
+    const interviewId = c.req.query("interviewId");
     const userId = c.req.query("userId");
-    if (!feedbackId || !userId) {
+    if (!interviewId || !userId) {
       throw new HTTPException(400, { message: "Missing query parameters" });
     }
     const response = await prisma.feedback.findUnique({
       where: {
-        id: feedbackId,
+        interviewId: interviewId,
+        userId:userId
       },
       include: {
         interview: true,
