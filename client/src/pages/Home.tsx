@@ -71,37 +71,37 @@ export default function Home() {
 
           <div className="flex flex-wrap justify-center gap-10 items-center">
             <img
-              src="/public/logos/google.svg"
+              src="/logos/google.svg"
               alt="Google"
               className="h-8  hover:opacity-100 transition"
               style={{ filter: "invert(1)" }}
             />
             <img
-              src="/public/logos/meta.svg"
+              src="/logos/meta.svg"
               alt="Meta"
               className="h-8 grayscale opacity-80 hover:opacity-100 transition"
               style={{ filter: "invert(1)" }}
             />
             <img
-              src="/public/logos/amazon.svg"
+              src="/logos/amazon.svg"
               alt="Amazon"
               className="h-8 grayscale opacity-80 hover:opacity-100 transition"
               style={{ filter: "invert(1)" }}
             />
             <img
-              src="/public/logos/microsoft-alt-svgrepo-com.svg"
+              src="/logos/microsoft-alt-svgrepo-com.svg"
               alt="Microsoft"
               className="h-8  grayscale opacity-80 hover:opacity-100 transition"
               style={{ filter: "invert(1)" }}
             />
             <img
-              src="/public/logos/netflix-svgrepo-com.svg"
+              src="/logos/netflix-svgrepo-com.svg"
               alt="Netflix"
               className="h-8 grayscale opacity-80 hover:opacity-100 transition"
               style={{ filter: "invert(1)" }}
             />
             <img
-              src="/public/logos/stripe.svg"
+              src="/logos/stripe.svg"
               alt="Stripe"
               className="h-8 grayscale opacity-80 hover:opacity-100 transition"
               style={{ filter: "invert(1)" }}
