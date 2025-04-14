@@ -2,7 +2,7 @@ import  { useState } from 'react'
 import PersonalDetail from './form/PersonalDetail'
 import { Navigate } from 'react-router-dom';
 import { Button } from '../ui/button';
-import { ArrowLeft, ArrowRight, LayoutGrid } from 'lucide-react';
+import { ArrowLeft, ArrowRight} from 'lucide-react';
 import Summary from './form/Summary';
 import Experience from './form/Experience';
 import Education from './form/Education';
